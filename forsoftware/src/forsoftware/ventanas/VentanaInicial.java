@@ -1,4 +1,4 @@
-package forsoftware;
+package forsoftware.ventanas;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

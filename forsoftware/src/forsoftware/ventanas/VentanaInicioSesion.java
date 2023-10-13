@@ -1,4 +1,4 @@
-package forsoftware;
+package forsoftware.ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
