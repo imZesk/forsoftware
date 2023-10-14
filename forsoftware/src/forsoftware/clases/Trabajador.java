@@ -1,4 +1,4 @@
-package forsoftware.trabajadores;
+package forsoftware.clases;
 
 import java.util.Objects;
 
