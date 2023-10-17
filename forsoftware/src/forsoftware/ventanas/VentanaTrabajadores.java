@@ -28,7 +28,16 @@ public class VentanaTrabajadores extends JFrame{
             {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
         };
 
-        DefaultTableModel model = new DefaultTableModel(datos, columnas);
+       // DefaultTableModel model = new DefaultTableModel(datos, columnas);
+
+		DefaultTableModel model = new DefaultTableModel(datos, columnas) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Hace que todas las celdas sean de solo lectura
+            }
+        };
         JTable tabla = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(tabla);
         JPanel panelBotones = new JPanel();
@@ -51,3 +60,4 @@ public class VentanaTrabajadores extends JFrame{
 		new VentanaTrabajadores();
 	}
 }
+
