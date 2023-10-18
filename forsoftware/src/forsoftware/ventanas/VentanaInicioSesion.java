@@ -45,6 +45,8 @@ public class VentanaInicioSesion extends JFrame {
             String text = correo.getText();
             if ("Ivan".equals(text)) {
                 JOptionPane.showMessageDialog(null, "Válido");
+                new VentanaInicial();
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Inválido");
             }
