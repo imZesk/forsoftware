@@ -12,7 +12,7 @@ public class VentanaInicial extends JFrame {
         JPanel panel1 = new JPanel(new BorderLayout());
 
         // Añadir imagen 
-        ImageIcon imagen = new ImageIcon("C:/Users/ytzes/Downloads/usuario.jpg");
+        ImageIcon imagen = new ImageIcon("src/usuario.jpg");
         JLabel etiquetaImagen = new JLabel(imagen);
         panel1.add(etiquetaImagen, BorderLayout.WEST);
 
@@ -24,12 +24,12 @@ public class VentanaInicial extends JFrame {
 
         // Añadir 3 botones debajo de la ventana
         JPanel panelBotones = new JPanel(new GridLayout(1, 3));
-        JButton boton1 = new JButton("Boton 1");
-        JButton boton2 = new JButton("Boton 2");
-        JButton boton3 = new JButton("Boton 3");
+        JButton boton1 = new JButton("Cerrar sesion");
+        JButton boton2 = new JButton("Cambiar contraseña");
+
         panelBotones.add(boton1);
         panelBotones.add(boton2);
-        panelBotones.add(boton3);
+ 
         panel1.add(panelBotones, BorderLayout.SOUTH);
 
         // Añadir lista con Jscroll a la derecha
@@ -39,6 +39,88 @@ public class VentanaInicial extends JFrame {
         panel1.add(scrollLista, BorderLayout.LINE_END);
         scrollLista.setPreferredSize(new Dimension(150, 0)); // Ancho del scroll
         lista.setFixedCellHeight(30); // aalto de los elementos de la lista
+        
+        
+        // Agregar campos de datos
+        JPanel panelDatos = new JPanel(new GridLayout(3, 3, 0, 0));
+
+        // Primer dato
+        JLabel etiquetaId = new JLabel("ID: ");
+        JTextField campoId = new JTextField("000");
+        campoId.setEditable(false);
+        campoId.setPreferredSize(new Dimension(120, 10));
+        etiquetaId.setPreferredSize(new Dimension(20, 10));
+        panelDatos.add(etiquetaId);
+        panelDatos.add(campoId);
+
+        // Segundo dato
+        JLabel etiquetaNombre = new JLabel("Nombre: ");
+        JTextField campoNombre = new JTextField("Ivan");
+        campoNombre.setEditable(false);
+        campoNombre.setPreferredSize(new Dimension(120, 10));
+        etiquetaNombre.setPreferredSize(new Dimension(20, 10));
+        panelDatos.add(etiquetaNombre);
+        panelDatos.add(campoNombre);
+
+        // Tercer dato
+        JLabel etiquetaApellido = new JLabel("Apellido: ");
+        JTextField campoApellido = new JTextField("Chen");
+        campoApellido.setEditable(false);
+        campoApellido.setPreferredSize(new Dimension(120, 10));
+        etiquetaApellido.setPreferredSize(new Dimension(20, 10));
+        panelDatos.add(etiquetaApellido);
+        panelDatos.add(campoApellido);
+
+        // Cuarto dato
+        JLabel etiquetaSexo = new JLabel("Sexo: ");
+        JTextField campoSexo = new JTextField("Helicoptero");
+        campoSexo.setEditable(false);
+        campoSexo.setPreferredSize(new Dimension(120, 10));
+        etiquetaSexo.setPreferredSize(new Dimension(20, 10));
+        panelDatos.add(etiquetaSexo);
+        panelDatos.add(campoSexo);
+
+        // Quinto dato
+        JLabel etiquetaProvincia = new JLabel("Provincia: ");
+        JTextField campoProvincia = new JTextField("Cantabria");
+        campoProvincia.setEditable(false);
+        campoProvincia.setPreferredSize(new Dimension(120, 10));
+        etiquetaProvincia.setPreferredSize(new Dimension(20, 10));
+        panelDatos.add(etiquetaProvincia);
+        panelDatos.add(campoProvincia);
+
+        // Sexto dato
+        JLabel etiquetaTelefono = new JLabel("Telefono: ");
+        JTextField campoTelefono = new JTextField("666777888");
+        campoTelefono.setEditable(false);
+        campoTelefono.setPreferredSize(new Dimension(120, 10));
+        etiquetaTelefono.setPreferredSize(new Dimension(20, 10));
+        panelDatos.add(etiquetaTelefono);
+        panelDatos.add(campoTelefono);
+        
+        panel1.add(panelDatos, BorderLayout.CENTER);
+        
+        // Septimo dato
+        JLabel etiquetaCorreoEmp = new JLabel("Dirección correo: ");
+        JTextField campoCorreoEmp = new JTextField("test@forsoftware.es");
+        campoCorreoEmp.setEditable(false);
+        campoCorreoEmp.setPreferredSize(new Dimension(120, 10));
+        etiquetaCorreoEmp.setPreferredSize(new Dimension(20, 10));
+        panelDatos.add(etiquetaCorreoEmp);
+        panelDatos.add(campoCorreoEmp);
+        
+        panel1.add(panelDatos, BorderLayout.CENTER);
+        
+        // Octavo dato
+        JLabel etiquetaSueldo = new JLabel("Sueldo: ");
+        JTextField campoSueldo = new JTextField("10000");
+        campoSueldo.setEditable(false);
+        campoSueldo.setPreferredSize(new Dimension(120, 10));
+        etiquetaSueldo.setPreferredSize(new Dimension(100, 20));
+        panelDatos.add(etiquetaSueldo);
+        panelDatos.add(campoSueldo);
+        
+        panel1.add(panelDatos, BorderLayout.CENTER);
         
 
         // Añadir pestaña 1 a las tabs
@@ -77,6 +159,7 @@ public class VentanaInicial extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        pack();
     }
 
     public static void main(String[] args) {
