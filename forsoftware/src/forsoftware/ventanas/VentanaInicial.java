@@ -17,7 +17,7 @@ public class VentanaInicial extends JFrame {
         panel1.add(etiquetaImagen, BorderLayout.WEST);
 
 
-        // Añadir 3 botones debajo de la ventana
+        // Añadir 3 botones debajo de la ventana 
         JPanel panelBotones = new JPanel(new GridLayout(1, 3));
         JButton boton1 = new JButton("Cerrar sesion");
         JButton boton2 = new JButton("Cambiar contraseña");
