@@ -16,11 +16,6 @@ public class VentanaInicial extends JFrame {
         JLabel etiquetaImagen = new JLabel(imagen);
         panel1.add(etiquetaImagen, BorderLayout.WEST);
 
-        // Añadir panel de texto no editable debajo de la imagen
-        JTextArea texto = new JTextArea("Datos del empleado [por añadir]");
-        texto.setEditable(false);
-        panel1.add(etiquetaImagen, BorderLayout.NORTH);
-        panel1.add(texto, BorderLayout.CENTER);
 
         // Añadir 3 botones debajo de la ventana
         JPanel panelBotones = new JPanel(new GridLayout(1, 3));
@@ -49,7 +44,7 @@ public class VentanaInicial extends JFrame {
         JTextField campoId = new JTextField("000");
         campoId.setEditable(false);
         campoId.setPreferredSize(new Dimension(120, 10));
-        etiquetaId.setPreferredSize(new Dimension(20, 10));
+        etiquetaId.setPreferredSize(new Dimension(120, 10));
         panelDatos.add(etiquetaId);
         panelDatos.add(campoId);
 
@@ -57,8 +52,8 @@ public class VentanaInicial extends JFrame {
         JLabel etiquetaNombre = new JLabel("Nombre: ");
         JTextField campoNombre = new JTextField("Ivan");
         campoNombre.setEditable(false);
-        campoNombre.setPreferredSize(new Dimension(120, 10));
-        etiquetaNombre.setPreferredSize(new Dimension(20, 10));
+        campoNombre.setPreferredSize(new Dimension(120, 0));
+        etiquetaNombre.setPreferredSize(new Dimension(120, 0));
         panelDatos.add(etiquetaNombre);
         panelDatos.add(campoNombre);
 
@@ -66,8 +61,8 @@ public class VentanaInicial extends JFrame {
         JLabel etiquetaApellido = new JLabel("Apellido: ");
         JTextField campoApellido = new JTextField("Chen");
         campoApellido.setEditable(false);
-        campoApellido.setPreferredSize(new Dimension(120, 10));
-        etiquetaApellido.setPreferredSize(new Dimension(20, 10));
+        campoApellido.setPreferredSize(new Dimension(120, 0));
+        etiquetaApellido.setPreferredSize(new Dimension(120, 0));
         panelDatos.add(etiquetaApellido);
         panelDatos.add(campoApellido);
 
@@ -75,8 +70,8 @@ public class VentanaInicial extends JFrame {
         JLabel etiquetaSexo = new JLabel("Sexo: ");
         JTextField campoSexo = new JTextField("Helicoptero");
         campoSexo.setEditable(false);
-        campoSexo.setPreferredSize(new Dimension(120, 10));
-        etiquetaSexo.setPreferredSize(new Dimension(20, 10));
+        campoSexo.setPreferredSize(new Dimension(120, 0));
+        etiquetaSexo.setPreferredSize(new Dimension(120, 0));
         panelDatos.add(etiquetaSexo);
         panelDatos.add(campoSexo);
 
@@ -84,8 +79,8 @@ public class VentanaInicial extends JFrame {
         JLabel etiquetaProvincia = new JLabel("Provincia: ");
         JTextField campoProvincia = new JTextField("Cantabria");
         campoProvincia.setEditable(false);
-        campoProvincia.setPreferredSize(new Dimension(120, 10));
-        etiquetaProvincia.setPreferredSize(new Dimension(20, 10));
+        campoProvincia.setPreferredSize(new Dimension(120, 0));
+        etiquetaProvincia.setPreferredSize(new Dimension(120, 0));
         panelDatos.add(etiquetaProvincia);
         panelDatos.add(campoProvincia);
 
@@ -93,8 +88,8 @@ public class VentanaInicial extends JFrame {
         JLabel etiquetaTelefono = new JLabel("Telefono: ");
         JTextField campoTelefono = new JTextField("666777888");
         campoTelefono.setEditable(false);
-        campoTelefono.setPreferredSize(new Dimension(120, 10));
-        etiquetaTelefono.setPreferredSize(new Dimension(20, 10));
+        campoTelefono.setPreferredSize(new Dimension(120, 0));
+        etiquetaTelefono.setPreferredSize(new Dimension(120, 0));
         panelDatos.add(etiquetaTelefono);
         panelDatos.add(campoTelefono);
         
@@ -104,8 +99,8 @@ public class VentanaInicial extends JFrame {
         JLabel etiquetaCorreoEmp = new JLabel("Dirección correo: ");
         JTextField campoCorreoEmp = new JTextField("test@forsoftware.es");
         campoCorreoEmp.setEditable(false);
-        campoCorreoEmp.setPreferredSize(new Dimension(120, 10));
-        etiquetaCorreoEmp.setPreferredSize(new Dimension(20, 10));
+        campoCorreoEmp.setPreferredSize(new Dimension(120, 0));
+        etiquetaCorreoEmp.setPreferredSize(new Dimension(120, 0));
         panelDatos.add(etiquetaCorreoEmp);
         panelDatos.add(campoCorreoEmp);
         
@@ -115,13 +110,12 @@ public class VentanaInicial extends JFrame {
         JLabel etiquetaSueldo = new JLabel("Sueldo: ");
         JTextField campoSueldo = new JTextField("10000");
         campoSueldo.setEditable(false);
-        campoSueldo.setPreferredSize(new Dimension(120, 10));
-        etiquetaSueldo.setPreferredSize(new Dimension(100, 20));
+        campoSueldo.setPreferredSize(new Dimension(120, 0));
+        etiquetaSueldo.setPreferredSize(new Dimension(120, 0));
         panelDatos.add(etiquetaSueldo);
         panelDatos.add(campoSueldo);
         
-        panel1.add(panelDatos, BorderLayout.CENTER);
-        
+        panel1.add(panelDatos, BorderLayout.CENTER);          
 
         // Añadir pestaña 1 a las tabs
         tabs.addTab("Pestaña 1", panel1);
