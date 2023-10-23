@@ -17,7 +17,7 @@ public class VentanaInicial extends JFrame {
         panel1.add(etiquetaImagen, BorderLayout.WEST);
 
 
-        // Añadir 3 botones debajo de la ventana 
+        // Añadir 3 botones debajo de la ventana  
         JPanel panelBotones = new JPanel(new GridLayout(1, 3));
         JButton boton1 = new JButton("Cerrar sesion");
         JButton boton2 = new JButton("Cambiar contraseña");
@@ -27,7 +27,7 @@ public class VentanaInicial extends JFrame {
  
         panel1.add(panelBotones, BorderLayout.SOUTH);
 
-        // Añadir lista con Jscroll a la derecha
+        // Añadir lista con Jscroll a la derecha 
         String[] elementosLista = {"Tarea 1", "Tarea 2", "Tarea 3", "Tarea 4", "Tarea 5", "Tarea 6", "Tarea 7", "Tarea 8", "Tarea 9", "Tarea 10"};
         JList<String> lista = new JList<>(elementosLista);
         JScrollPane scrollLista = new JScrollPane(lista);
@@ -36,7 +36,7 @@ public class VentanaInicial extends JFrame {
         lista.setFixedCellHeight(30); // aalto de los elementos de la lista
         
         
-        // Agregar campos de datos
+        // Agregar campos de datos 
         JPanel panelDatos = new JPanel(new GridLayout(3, 3, 0, 0));
 
         // Primer dato
