@@ -22,8 +22,8 @@ public class VentanaInicial extends JFrame {
         JButton btnContrasena = new JButton("Cambiar contraseña");
         JButton btnCerrarSesion = new JButton("Cerrar sesion");
         
-        panelBotones.add(btnCerrarSesion);
         panelBotones.add(btnContrasena);
+        panelBotones.add(btnCerrarSesion);
  
         panel1.add(panelBotones, BorderLayout.SOUTH);
 
