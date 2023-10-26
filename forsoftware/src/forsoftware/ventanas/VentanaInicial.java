@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class VentanaInicial extends JFrame {
     public VentanaInicial() {
-
+    	JFrame framePrin = new JFrame("Ventana Principal"); 
         JTabbedPane tabs = new JTabbedPane();
 
         // Pestaña 1
@@ -122,56 +122,53 @@ public class VentanaInicial extends JFrame {
         // Añadir pestaña 1 a las tabs
         tabs.addTab("Pestaña 1", panel1);
 // ========================================= FIN PESTAÑA 1 =========================================
-        // Pestaña 2
-        JPanel panel2 = new JPanel();
-        tabs.addTab("Pestaña 2", panel2);
-        
-        
-        JFrame ventana = new JFrame("Lista de Trabajadores");
-
-        // Crear los datos de ejemplo 
-        String[] columnas = {"ID", "Nombre", "Apellido", "Género", "Provincia", "Telefono", "Correo de empresa", "Sueldo"};
-        String[][] datos = {
-            {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-            {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-            {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-            {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-            {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-            {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-            {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-            {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-            {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-            {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-            {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-        };
-
-       // DefaultTableModel model = new DefaultTableModel(datos, columnas);
-
-		DefaultTableModel model = new DefaultTableModel(datos, columnas) {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // Hace que todas las celdas sean de solo lectura
-            }
-        };
-        JTable tabla = new JTable(model);
-        JScrollPane scrollPane = new JScrollPane(tabla);
-        JPanel panelBotones2 = new JPanel();
-        
-        JButton botonAnyadir = new JButton("Añadir trabajador");
-        JButton botonEliminar = new JButton("Eliminar trabajador");
-        panelBotones2.add(botonAnyadir);
-        panelBotones2.add(botonEliminar);
-        
-        panel2.add(scrollPane, BorderLayout.CENTER);
-        panel2.add(panelBotones2, BorderLayout.SOUTH);
-
        
-        panel2.setSize(700, 350);
-        panel2.setVisible(true);
-        tabs.addTab("Pestaña 3", panel2);
+        
+        
+        
+        
+        
+        
+        
+        // Pestaña 2
+        VentanaProyectos ventanaProyect = new VentanaProyectos();
+        tabs.addTab("Pestaña 3", ventanaProyect);
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 // ========================================= FIN PESTAÑA 2 =========================================        
         
         // Pestaña 3
@@ -191,14 +188,15 @@ public class VentanaInicial extends JFrame {
 // ========================================= FIN PESTAÑA 4 =========================================
         
         // Añadir tabs a la ventana
-        add(tabs);
+        framePrin.add(tabs);
+
 
         // Configurar ventana
-        setTitle("Bienvenido, [] - ForSoftware");
-        setSize(1200, 500);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        framePrin.setTitle("Bienvenido, [] - ForSoftware");
+        framePrin.setSize(1200, 500);
+        framePrin.setLocationRelativeTo(null);
+        framePrin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        framePrin.setVisible(true);
         pack();
     }
 
