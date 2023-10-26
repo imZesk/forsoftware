@@ -61,15 +61,20 @@ public class VentanaInicioSesion extends JFrame {
 		pCentro.add(confirmar, gbc);
 		
 		confirmar.addActionListener(e -> {
-            String text = correo.getText();
-            if ("Ivan".equals(text)) {
-                JOptionPane.showMessageDialog(null, "Válido");
-                new VentanaInicial();
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Inválido");
-            }
-        });
+		    String text1 = correo.getText();
+		    String text2 = new String(contraseña.getPassword());
+
+		    if(text1.isEmpty() || text2.isEmpty()){
+		        JOptionPane.showMessageDialog(null, "Por favor, rellene ambos campos: correo y contraseña");
+		    } else if ("ramon.perez@forsoftware.com".equals(text1) && "Ramon".equals(text2)) {
+		        JOptionPane.showMessageDialog(null, "Válido");
+		        new VentanaInicial();
+		        dispose();
+		    } else {
+		        JOptionPane.showMessageDialog(null, "Correo o contraseña inválidos");
+		    }
+		});
+
 		
 		setVisible(true);
 	}
