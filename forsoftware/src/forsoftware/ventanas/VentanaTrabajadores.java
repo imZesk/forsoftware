@@ -1,5 +1,6 @@
 package forsoftware.ventanas;
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -53,6 +54,28 @@ public class VentanaTrabajadores extends JFrame{
        
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setSize(700, 350);
+        
+        botonEliminar.addActionListener(e ->{ 
+                int filaSeleccionada = tabla.getSelectedRow();
+                if(filaSeleccionada >= 0){
+                    model.removeRow(filaSeleccionada);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Por favor, selecciona una fila primero");
+                }
+            
+        });
+        
+        botonAnyadir.addActionListener(e ->{
+                String idTrabajador = JOptionPane.showInputDialog("Introduce el ID del trabajador");
+                if(idTrabajador != null && !idTrabajador.isEmpty()){
+                    model.addRow(new Object[]{idTrabajador, "Nombre", "Apellido", "Género", "Provincia", "Telefono", "Correo de empresa", "Sueldo"});
+                }else{
+                    JOptionPane.showMessageDialog(null, "Por favor, introduce un ID válido");
+                }
+            
+        });
+
+
         ventana.setVisible(true);
     }
 
