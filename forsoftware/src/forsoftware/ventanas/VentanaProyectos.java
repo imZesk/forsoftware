@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 public class VentanaProyectos extends JPanel{
 	public VentanaProyectos() {
 
-        JFrame ventana = new JFrame("Lista de Trabajadores");
 
         // Crear los datos de ejemplo 
         String[] columnas = {"ID", "Nombre", "nº participantes", "FechaInicio", "FechaAcabado", "Gastos", "Estado"};
@@ -50,13 +49,9 @@ public class VentanaProyectos extends JPanel{
         panelBotones.add(botonEliminar);
         panelBotones.add(botonFinalizado);
         
-        ventana.add(scrollPane, BorderLayout.CENTER);
-        ventana.add(panelBotones, BorderLayout.SOUTH);
-
-       
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setSize(700, 350);
-        ventana.setVisible(true);
+        setLayout(new BorderLayout());
+        add(scrollPane, BorderLayout.CENTER);
+        add(panelBotones, BorderLayout.SOUTH);
     }
 
 

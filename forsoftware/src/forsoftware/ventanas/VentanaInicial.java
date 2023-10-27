@@ -7,7 +7,6 @@ import java.awt.*;
 
 public class VentanaInicial extends JFrame {
     public VentanaInicial() {
-    	JFrame framePrin = new JFrame("Ventana Principal"); 
         JTabbedPane tabs = new JTabbedPane();
 
         // Pestaña 1
@@ -121,61 +120,20 @@ public class VentanaInicial extends JFrame {
 
         // Añadir pestaña 1 a las tabs
         tabs.addTab("Pestaña 1", panel1);
+        
 // ========================================= FIN PESTAÑA 1 =========================================
+      
        
-        
-        
-        
-        
-        
-        
-        
         // Pestaña 2
         VentanaProyectos ventanaProyect = new VentanaProyectos();
-        tabs.addTab("Pestaña 3", ventanaProyect);
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        tabs.addTab("Proyectos", ventanaProyect);
         
 // ========================================= FIN PESTAÑA 2 =========================================        
         
         // Pestaña 3
-        JPanel panel3 = new JPanel();
-        JLabel etiqueta3 = new JLabel("Contenido de la pestaña 3");
-        panel3.add(etiqueta3);
-        tabs.addTab("Pestaña 3", panel3);
+        VentanaTrabajadores ventanaTrabajadores = new VentanaTrabajadores();
+        tabs.addTab("Trabajadores", ventanaTrabajadores);
+
 
 // ========================================= FIN PESTAÑA 3 =========================================
 
@@ -188,19 +146,22 @@ public class VentanaInicial extends JFrame {
 // ========================================= FIN PESTAÑA 4 =========================================
         
         // Añadir tabs a la ventana
-        framePrin.add(tabs);
+        add(tabs);
 
 
         // Configurar ventana
-        framePrin.setTitle("Bienvenido, [] - ForSoftware");
-        framePrin.setSize(1200, 500);
-        framePrin.setLocationRelativeTo(null);
-        framePrin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        framePrin.setVisible(true);
-        pack();
+        setTitle("Bienvenido, [] - ForSoftware");
+        setSize(1200, 500);
+        setLocationRelativeTo(null); //centrar la ventana a la pantalla
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     public static void main(String[] args) {
-        new VentanaInicial();
+    	SwingUtilities.invokeLater(() -> {         //asegurar de que el codigo este y asegurar que la interfaz de usuario se actualice de manera adecuada
+            VentanaInicial ventana = new VentanaInicial();
+            ventana.setVisible(true);
+        });
+
     }
 }

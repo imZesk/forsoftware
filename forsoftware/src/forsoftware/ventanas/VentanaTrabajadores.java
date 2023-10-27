@@ -5,13 +5,11 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class VentanaTrabajadores extends JFrame{
+public class VentanaTrabajadores extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
 	public VentanaTrabajadores() {
-
-        JFrame ventana = new JFrame("Lista de Trabajadores");
 
         // Crear los datos de ejemplo 
         String[] columnas = {"ID", "Nombre", "Apellido", "Género", "Provincia", "Telefono", "Correo de empresa", "Sueldo"};
@@ -48,12 +46,10 @@ public class VentanaTrabajadores extends JFrame{
         panelBotones.add(botonAnyadir);
         panelBotones.add(botonEliminar);
         
-        ventana.add(scrollPane, BorderLayout.CENTER);
-        ventana.add(panelBotones, BorderLayout.SOUTH);
+        setLayout(new BorderLayout());
+        add(scrollPane, BorderLayout.CENTER);
+        add(panelBotones, BorderLayout.SOUTH);
 
-       
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setSize(700, 350);
         
         botonEliminar.addActionListener(e ->{ 
                 int filaSeleccionada = tabla.getSelectedRow();
@@ -76,11 +72,8 @@ public class VentanaTrabajadores extends JFrame{
         });
 
 
-        ventana.setVisible(true);
+
     }
 
-	public static void main(String[] args) {
-		new VentanaTrabajadores();
-	}
 }
 
