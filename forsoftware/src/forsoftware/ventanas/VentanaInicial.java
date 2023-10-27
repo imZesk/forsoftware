@@ -6,7 +6,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class VentanaInicial extends JFrame {
-    public VentanaInicial() {
+    
+	
+	public VentanaInicial() {
 
         JTabbedPane tabs = new JTabbedPane();
 
@@ -175,10 +177,8 @@ public class VentanaInicial extends JFrame {
 // ========================================= FIN PESTAÑA 2 =========================================        
         
         // Pestaña 3
-        JPanel panel3 = new JPanel();
-        JLabel etiqueta3 = new JLabel("Contenido de la pestaña 3");
-        panel3.add(etiqueta3);
-        tabs.addTab("Pestaña 3", panel3);
+        VentanaProyectos ventanaP = new VentanaProyectos();
+        tabs.addTab("Pestaña 3", ventanaP);
 
 // ========================================= FIN PESTAÑA 3 =========================================
 

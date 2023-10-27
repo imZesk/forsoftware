@@ -7,7 +7,7 @@ import java.io.IOException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class VentanaTrabajadores extends JFrame{
+public class VentanaTrabajadores extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
@@ -90,8 +90,8 @@ public class VentanaTrabajadores extends JFrame{
         ventana.setVisible(true);
     }
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		new VentanaTrabajadores();
-	}
+	}*/
 }
 

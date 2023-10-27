@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class VentanaProyectos {
+public class VentanaProyectos extends JPanel{
 	public VentanaProyectos() {
 
         JFrame ventana = new JFrame("Lista de Trabajadores");
@@ -59,9 +59,9 @@ public class VentanaProyectos {
         ventana.setVisible(true);
     }
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		new VentanaProyectos();
-	}
+	}*/
 }
 
 
