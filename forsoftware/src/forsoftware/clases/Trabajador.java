@@ -9,6 +9,9 @@ public class Trabajador {
 	public enum Sexo {
 		hombre,mujer,otros;
 	}
+	public enum Puesto{
+		programador, modelador, gameDesigner, artista, escritor, video, sonido;
+	}
 	private String provincia;
 	private int telefono;
 	private String correoEmpresa;

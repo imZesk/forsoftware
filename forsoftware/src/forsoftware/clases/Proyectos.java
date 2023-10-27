@@ -10,7 +10,10 @@ public class Proyectos {
 	private Date fechaInicio;
 	private Date fehcaAcabadoEstimado;
 	private double gastos;
-	private enum EstadoProyecto {
+	public enum TipoDeProyecto {
+		software, multimedia               //software: programador, modelador, gameDesigner
+	}                                      //multimedia: artista, escritor, video, sonido
+	public enum EstadoProyecto {
 		pendiente, finalizado
 	}
 	
