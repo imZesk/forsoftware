@@ -36,6 +36,7 @@ public class VentanaInicial extends JFrame {
         scrollLista.setPreferredSize(new Dimension(150, 0)); // Ancho del scroll
         lista.setFixedCellHeight(30); // aalto de los elementos de la lista
         
+         
         
         // Agregar campos de datos 
         JPanel panelDatos = new JPanel(new GridLayout(3, 3, 0, 0));
