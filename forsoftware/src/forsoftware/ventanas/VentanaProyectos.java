@@ -54,7 +54,13 @@ public class VentanaProyectos extends JPanel{
         add(panelBotones, BorderLayout.SOUTH);
     }
 
+<<<<<<< HEAD
 
+=======
+	/*public static void main(String[] args) {
+		new VentanaProyectos();
+	}*/
+>>>>>>> branch 'master' of https://github.com/imZesk/forsoftware.git
 }
 
 
