@@ -174,15 +174,7 @@ public class VentanaInicial extends JFrame {
 
 
 // ========================================= FIN PESTAÑA 3 =========================================
-
-        // Pestaña 4
-        JPanel panel4 = new JPanel();
-        JLabel etiqueta4 = new JLabel("Contenido de la pestaña 4");
-        panel4.add(etiqueta4);
-        tabs.addTab("Pestaña 4", panel4);
-
-// ========================================= FIN PESTAÑA 4 =========================================
-        
+       
         // Añadir tabs a la ventana
         add(tabs);
 
