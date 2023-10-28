@@ -68,9 +68,8 @@ public class VentanaProyectos extends JPanel{
         botonAnyadir.addActionListener(e ->{
         	String[] nomDatos = {"ID", "nombre", "numeroDeParticipante", "fechaInicio", "fehcaAcabadoEstimado", "gastos", "TipoDeProyecto", "EstadoProyecto"}; 
         	for (int i = 0; i < nomDatos.length; i++) {
-				String[] strings = nomDatos[i];
 				String datoProyecto = JOptionPane.showInputDialog("Introduce el " + nomDatos[i] + " del proyecto");
-	            if(datoProyecto != null && !idProyecto.isEmpty()){
+	            if(datoProyecto != null && !datoProyecto.isEmpty()){
 	                model.addRow(new Object[]{idTrabajador, "Nombre", "Apellido", "Género", "Provincia", "Telefono", "Correo de empresa", "Sueldo"});
 	            }else{
 	                JOptionPane.showMessageDialog(null, "Por favor, introduce un ID válido");
