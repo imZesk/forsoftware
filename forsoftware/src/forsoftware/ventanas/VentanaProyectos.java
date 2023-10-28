@@ -1,9 +1,11 @@
 package forsoftware.ventanas;
 
 import java.awt.BorderLayout;
+import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -14,17 +16,17 @@ public class VentanaProyectos extends JPanel{
 
 
         // Crear los datos de ejemplo 
-        String[] columnas = {"ID", "Nombre", "nº participantes", "FechaInicio", "FechaAcabado", "Gastos", "Estado"};
+        String[] columnas = {"ID", "Nombre", "nº participantes", "FechaInicio", "FechaAcabado", "Gastos", "Tipo", "Estado"};
         String[][] datos = {
-            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00", "5000.00", "pendiente"},
-            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00", "5000.00", "pendiente"},
-            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00", "5000.00", "pendiente"},
-            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00", "5000.00", "pendiente"},
-            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00", "5000.00", "pendiente"},
-            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00", "5000.00", "pendiente"},
-            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00", "5000.00", "pendiente"},
-            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00", "5000.00", "pendiente"},
-            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00", "5000.00", "pendiente"},
+            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "pendiente"},
+            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "pendiente"},
+            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "pendiente"},
+            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "pendiente"},
+            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "pendiente"},
+            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "pendiente"},
+            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "pendiente"},
+            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "pendiente"},
+            {"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "pendiente"},
 
         };
 
@@ -52,6 +54,29 @@ public class VentanaProyectos extends JPanel{
         setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);
         add(panelBotones, BorderLayout.SOUTH);
+        
+        
+        botonEliminar.addActionListener(e ->{ 
+            int filaSeleccionada = tabla.getSelectedRow();
+            if(filaSeleccionada >= 0){
+                model.removeRow(filaSeleccionada);
+            }else{
+                JOptionPane.showMessageDialog(null, "Por favor, selecciona una fila primero");
+            }
+        
+    });
+        botonAnyadir.addActionListener(e ->{
+        	String[] nomDatos = {"ID", "nombre", "numeroDeParticipante", "fechaInicio", "fehcaAcabadoEstimado", "gastos", "TipoDeProyecto", "EstadoProyecto"}; 
+        	for (int i = 0; i < nomDatos.length; i++) {
+				String[] strings = nomDatos[i];
+				String datoProyecto = JOptionPane.showInputDialog("Introduce el " + nomDatos[i] + " del proyecto");
+	            if(datoProyecto != null && !idProyecto.isEmpty()){
+	                model.addRow(new Object[]{idTrabajador, "Nombre", "Apellido", "Género", "Provincia", "Telefono", "Correo de empresa", "Sueldo"});
+	            }else{
+	                JOptionPane.showMessageDialog(null, "Por favor, introduce un ID válido");
+	            }
+			}       
+    });
     }
 
 }
