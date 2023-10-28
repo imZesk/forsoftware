@@ -95,8 +95,8 @@ public class VentanaTrabajadores extends JPanel{
         
         botonAnyadir.addActionListener(e ->{
             String idTrabajador = JOptionPane.showInputDialog("Introduce el ID del trabajador");
-            while(idTrabajador != null && !idTrabajador.matches("\\d+")) {
-                JOptionPane.showMessageDialog(null, "Por favor, introduce un ID válido (solo números)");
+            while(idTrabajador != null && !idTrabajador.matches("\\d{4}")) {
+                JOptionPane.showMessageDialog(null, "Por favor, introduce un ID válido (exactamente 4 dígitos)");
                 idTrabajador = JOptionPane.showInputDialog("Introduce el ID del trabajador");
             }
 
