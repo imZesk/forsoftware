@@ -51,14 +51,15 @@ public class VentanaTrabajadores extends JPanel{
 
         JTable tabla = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(tabla);
+        JPanel panelBotones = new JPanel();
         JPanel panelBotones2 = new JPanel();
         
-        ventana.add(scrollPane, BorderLayout.CENTER);
-        ventana.add(panelBotones2, BorderLayout.SOUTH);
+        add(scrollPane, BorderLayout.CENTER);
+        add(panelBotones2, BorderLayout.SOUTH);
         
         JButton botonAnyadir = new JButton("Añadir trabajador");
         JButton botonEliminar = new JButton("Eliminar trabajador");
-<<<<<<< HEAD
+
         panelBotones.add(botonAnyadir);
         panelBotones.add(botonEliminar);
         
@@ -66,13 +67,10 @@ public class VentanaTrabajadores extends JPanel{
         add(scrollPane, BorderLayout.CENTER);
         add(panelBotones, BorderLayout.SOUTH);
 
-=======
+
         panelBotones2.add(botonAnyadir);
         panelBotones2.add(botonEliminar);
-       
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setSize(700, 350);
->>>>>>> branch 'master' of https://github.com/imZesk/forsoftware.git
+
         
         botonEliminar.addActionListener(e ->{ 
                 int filaSeleccionada = tabla.getSelectedRow();
@@ -98,11 +96,6 @@ public class VentanaTrabajadores extends JPanel{
 
     }
 
-<<<<<<< HEAD
-=======
-	/*public static void main(String[] args) {
-		new VentanaTrabajadores();
-	}*/
->>>>>>> branch 'master' of https://github.com/imZesk/forsoftware.git
+
 }
 
