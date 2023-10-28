@@ -25,6 +25,34 @@ public class VentanaInicial extends JFrame {
         
         panelBotones.add(btnContrasena);
         panelBotones.add(btnCerrarSesion);
+        
+        btnCerrarSesion.addActionListener(e ->{
+        	new VentanaInicioSesion();
+        	dispose();
+    });
+        
+        btnContrasena.addActionListener(e ->{
+        	String passTest = "Ramon";
+            String contOld = JOptionPane.showInputDialog("Introduce tu contraseña actual");
+            if(passTest.equals(contOld)){
+            	String contNueva1 = JOptionPane.showInputDialog("Introduce tu nueva contraseña");
+            	String contNueva2 = JOptionPane.showInputDialog("Introduce de nuevo tu nueva contraseña");
+            	if (contNueva1.equals(contNueva2)) {
+            		JOptionPane.showMessageDialog(null, "Contraseña cambiada, inicia sesion de nuevo."); // La contraseña no se actualiza por que no tenemos las bases de 
+                	new VentanaInicioSesion();															 // datos de usuarios creadas
+                	dispose();
+				}else {
+	                JOptionPane.showMessageDialog(null, "Las ontraseñas no coinciden");
+				}            	
+            }else{
+            	System.out.println(passTest);
+            	System.out.println(contOld);
+                JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
+            }
+        
+    });
+
+        
  
         panel1.add(panelBotones, BorderLayout.SOUTH);
 
@@ -70,12 +98,21 @@ public class VentanaInicial extends JFrame {
 
         // Cuarto dato
         JLabel etiquetaSexo = new JLabel("Sexo: ");
-        JTextField campoSexo = new JTextField("Helicoptero");
+        JTextField campoSexo = new JTextField("Masculino");
         campoSexo.setEditable(false);
         campoSexo.setPreferredSize(new Dimension(120, 0));
         etiquetaSexo.setPreferredSize(new Dimension(120, 0));
         panelDatos.add(etiquetaSexo);
         panelDatos.add(campoSexo);
+        
+        // Cuarto dato
+        JLabel etiquetaPuesto = new JLabel("Puesto: ");
+        JTextField campoPuesto = new JTextField("Programador");
+        campoPuesto.setEditable(false);
+        campoPuesto.setPreferredSize(new Dimension(120, 0));
+        etiquetaSexo.setPreferredSize(new Dimension(120, 0));
+        panelDatos.add(etiquetaPuesto);
+        panelDatos.add(campoPuesto);
 
         // Quinto dato
         JLabel etiquetaProvincia = new JLabel("Provincia: ");
