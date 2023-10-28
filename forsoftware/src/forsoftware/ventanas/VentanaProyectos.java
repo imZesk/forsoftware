@@ -76,7 +76,6 @@ public class VentanaProyectos extends JPanel{
 					}
 				}
 			}
-
 			for (int i = 0; i < nomDatos.length; i++) {
 				System.out.println(nomDatos[i] + ": " + valores[i]);
 			}
