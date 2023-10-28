@@ -66,14 +66,8 @@ public class VentanaProyectos extends JPanel{
 
 		});
 		botonAnyadir.addActionListener(e ->{
-			String[] nomDatos = {"ID (solo 4 digitos)", "nombre (solo letras) ", "numeroDeParticipante (solo numeros)", "fechaInicio (con formato dd/mm/yyyy)", "fehcaAcabadoEstimado (con formato dd/mm/yyyy)", 
-					"gastos (numeros con dos decimales)", "TipoDeProyecto (Software o Proyectos", "EstadoProyecto"};
+			String[] nomDatos = {"ID", "nombre", "numeroDeParticipante", "fechaInicio", "fehcaAcabadoEstimado", "gastos", "TipoDeProyecto", "EstadoProyecto"};
 			String[] valores = new String[nomDatos.length];
-			String[] regexPatterns = {"\\d{4}", "[a-zA-Z]+", "\\d+", "\\d{2}/\\d{2}/\\d{4}", "\\d{2}/\\d{2}/\\d{4}", "\\d+\\.\\d{2}", "[Ss]oftware|[Mm]ultimedia", "Pendiente"};		
-			
-			//el estado del proyecto al crearlo siempre es pendiente
-			valores[nomDatos.length - 1] = "Pendiente";
-			
 			for (int i = 0; i < nomDatos.length; i++) {
 				while (valores[i] == null || valores[i].isEmpty()) {
 					valores[i] = JOptionPane.showInputDialog("Ingrese " + nomDatos[i] + ": ");
@@ -96,6 +90,23 @@ public class VentanaProyectos extends JPanel{
 	            }else{
 	                JOptionPane.showMessageDialog(null, "Por favor, introduce un ID válido");
 	            }*/	            	            
+		});
+		
+		
+		
+		botonFinalizado.addActionListener(e -> {
+			int filaSeleccionada = tabla.getSelectedRow();
+		    if(filaSeleccionada >= 0){
+		        String estado = model.getValueAt(filaSeleccionada, 7).toString();
+		        if(estado.equalsIgnoreCase("pendiente")){
+		            model.setValueAt("finalizado", filaSeleccionada, 7);
+		        }else{
+		            JOptionPane.showMessageDialog(null, "El proyecto ya está finalizado");
+		        }
+		    }else{
+		        JOptionPane.showMessageDialog(null, "Por favor, selecciona una fila primero");
+		    }
+			
 		});
 	}
 }
