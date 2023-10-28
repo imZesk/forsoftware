@@ -15,7 +15,19 @@ public class VentanaTrabajadores extends JPanel{
 
         // Crear los datos de ejemplo 
         String[] columnas = {"ID", "Nombre", "Apellido", "Género", "Provincia", "Telefono", "Correo de empresa", "Sueldo"};
-        String[][] datos = {};
+        String[][] datos = {
+                {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
+                {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
+                {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
+                {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
+                {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
+                {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
+                {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
+                {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
+                {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
+                {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
+                {"1112", "Juan", "Pérez", "hombre", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
+            };
 
         
         // DefaultTableModel model = new DefaultTableModel(datos, columnas);
@@ -28,7 +40,8 @@ public class VentanaTrabajadores extends JPanel{
                  return false; // Hace que todas las celdas sean de solo lectura
              }
          };
-        
+  
+         /*
 		String fichero = "src/Trabajadores.csv";
 		String line = "";
 
@@ -47,15 +60,15 @@ public class VentanaTrabajadores extends JPanel{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
 
 
         JTable tabla = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(tabla);
         JPanel panelBotones = new JPanel();
-        JPanel panelBotones2 = new JPanel();
         
         add(scrollPane, BorderLayout.CENTER);
-        add(panelBotones2, BorderLayout.SOUTH);
+        add(panelBotones, BorderLayout.SOUTH);
         
         JButton botonAnyadir = new JButton("Añadir trabajador");
         JButton botonEliminar = new JButton("Eliminar trabajador");
@@ -68,8 +81,8 @@ public class VentanaTrabajadores extends JPanel{
         add(panelBotones, BorderLayout.SOUTH);
 
 
-        panelBotones2.add(botonAnyadir);
-        panelBotones2.add(botonEliminar);
+        panelBotones.add(botonAnyadir);
+        panelBotones.add(botonEliminar);
 
         
         botonEliminar.addActionListener(e ->{ 
