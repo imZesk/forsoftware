@@ -106,7 +106,7 @@ public class VentanaProyectos extends JPanel{
 						}
 					}
 					if (!validar) {
-	                    // Si se hace clic en Cancelar, se proporciona una entrada vacía o la entrada no cumple con la validación, se solicitará nuevamente.
+	                   
 	                    JOptionPane.showMessageDialog(null, "Debe proporcionar un valor válido para " + nomDatos[i]);
 				}
 			}
