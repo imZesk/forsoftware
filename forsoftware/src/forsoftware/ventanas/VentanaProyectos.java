@@ -1,36 +1,48 @@
 package forsoftware.ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Iterator;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
+import forsoftware.clases.Proyectos.TipoDeProyecto;
+
 public class VentanaProyectos extends JPanel{
+
+	private static final long serialVersionUID = 1L;
+
 	public VentanaProyectos() {
 
 
 		// Crear los datos de ejemplo 
 		String[] columnas = {"ID", "Nombre", "nº participantes", "FechaInicio", "FechaAcabado", "Gastos", "Tipo", "Estado"};
 		String[][] datos = {
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "pendiente"},
+				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "Pendiente"},
+				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "Pendiente"},
+				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "Pendiente"},
+				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "Pendiente"},
+				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "Pendiente"},
+				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "Pendiente"},
+				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "Pendiente"},
+				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "Pendiente"},
+				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "Pendiente"},
 
 		};
-
-		// DefaultTableModel model = new DefaultTableModel(datos, columnas);
 
 		DefaultTableModel model = new DefaultTableModel(datos, columnas) {
 			private static final long serialVersionUID = 1L;
@@ -65,64 +77,121 @@ public class VentanaProyectos extends JPanel{
 			}
 
 		});
-		botonAnyadir.addActionListener(e ->{
-			String[] nomDatos = {"ID (solo 4 digitos)", "nombre (solo letras) ", "numeroDeParticipante (solo numeros)", "fechaInicio (con formato dd/mm/yyyy)", "fehcaAcabadoEstimado (con formato dd/mm/yyyy)", 
-					"gastos (numeros con dos decimales)", "TipoDeProyecto (Software o Proyectos)", "EstadoProyecto"};
-			String[] valores = new String[nomDatos.length];
-
-			//el estado del proyecto al crearlo siempre es pendiente
-			valores[nomDatos.length - 1] = "Pendiente";
-
-			for (int i = 0; i < nomDatos.length-1; i++) {  //length-1 par q no pregunte el estado q sera de prederteminado como "pendiente"
-				boolean validar = false;
-				while (!validar) {
-					valores[i] = JOptionPane.showInputDialog("Ingrese " + nomDatos[i] + ": ");
-					
-					// cancelar el proceso de añadir si se pulsa "Cancelar" o cierra la ventana
-					if (valores[i] == null) {
-	                    return; // Salir del programa
-	                }
-					
-					
-					
-					if (!valores[i].isEmpty()) {
-						validar = true;
-
-						// Aplicar limitaciones específicas para cada campo
-						if (i == 0 && !valores[i].matches("\\d{4}")) { // ID (4 dígitos)
-							validar = false;
-						} else if (i == 1 && !valores[i].matches("[a-zA-Z]+")) { // Nombre (solo letras)
-							validar = false;
-						} else if (i == 2 && !valores[i].matches("\\d+")) { // numeroDeParticipante (solo numeros)
-							validar = false;
-						} else if (i == 3 && !valores[i].matches("\\d{2}/\\d{2}/\\d{4}")) { // fechaInicio (con formato dd/mm/yyyy)
-							validar = false;
-						} else if (i == 4 && !valores[i].matches("\\d{2}/\\d{2}/\\d{4}")) { // fehcaAcabadoEstimado (con formato dd/mm/yyyy)
-							validar = false;
-						} else if (i == 5 && !valores[i].matches("\\d+\\.\\d{2}")) { // gastos (numeros con dos decimales)
-							validar = false;
-						} else if (i == 6 && !valores[i].equalsIgnoreCase("Software") && !valores[i].equalsIgnoreCase("Multimedia")) { // TipoDeProyecto (Software o Proyectos)
-							validar = false;
-						}
-					}
-					if (!validar) {
-	                   
-	                    JOptionPane.showMessageDialog(null, "Debe proporcionar un valor válido para " + nomDatos[i]);
-				}
-			}
-		}
-			model.addRow(valores);
 		
+		//----------------------------------------------------------------------------------------------------
+		//Funcion del botonAnyadir----------------------------------------------------------------------------
+		botonAnyadir.addActionListener(e ->{
+			JDialog ventanillaAnyadir = new JDialog();
+	        ventanillaAnyadir.setTitle("Ingresar Datos del Proyecto");
+	        ventanillaAnyadir.setLayout(new BorderLayout());
+
+	        // Campos de entrada
+	        JPanel panelDeDatos = new JPanel(new GridLayout(8, 2));
+	        JTextField[] jTextIntroducido = new JTextField[6];
+	        Color[] colorDefecto = new Color[6]; //para poner el fondo de nuevo en blanco
+	        String[] nomDatos = {"ID (4 dígitos)", "Nombre (solo letras)", "Número de Participante", "Fecha de Inicio",
+	        		"Fecha de Acabado Estimado", "Gastos (dos decimales)"};
+
+	        for (int pos = 0; pos < 6; pos++) {
+	            JLabel label = new JLabel(nomDatos[pos]);
+	            jTextIntroducido[pos] = new JTextField();
+	            colorDefecto[pos] = jTextIntroducido[pos].getBackground(); // guardar el color defecto(blanco)
+	            panelDeDatos.add(label);
+	            panelDeDatos.add(jTextIntroducido[pos]);
+	        }
+	        
+	        
+	        //combobox para escoger el tipo de proyecto
+	        JPanel comboBoxPanel = new JPanel();
+	        JLabel labelTipoProyecto = new JLabel("Tipo de Proyecto:");
+	        JComboBox<TipoDeProyecto> comboBoxTipoProyecto = new JComboBox<>(TipoDeProyecto.values());
+	        comboBoxTipoProyecto.setSelectedItem(null);
+	        comboBoxPanel.add(labelTipoProyecto);
+	        comboBoxPanel.add(comboBoxTipoProyecto);
+	        
+	        
+	        //parte de los botones
+	        JPanel botonPanel = new JPanel(); 
+	        JButton botonAceptar = new JButton("Aceptar");
+	        JButton botonCancelar = new JButton("Cancelar");
+	        botonPanel.add(botonAceptar);
+	        botonPanel.add(botonCancelar);
+	        
 
 
+	        botonAceptar.addActionListener(new ActionListener() { //combrobar la validez de los datos introcucidos
+	            public void actionPerformed(ActionEvent e) {
+	            	
+	            	String[] valores = new String[7];
+	            	boolean validar = true;
+	               
+	                   
+	            	TipoDeProyecto tipoProyecto = (TipoDeProyecto) comboBoxTipoProyecto.getSelectedItem();
 
+	            	if (tipoProyecto == null) {
+	                    comboBoxTipoProyecto.setBackground(Color.PINK); // Marcar en rojo si no se selecciona un valor
+	                    validar = false;;
+	                } else {
+	                    comboBoxTipoProyecto.setBackground(Color.WHITE); // Restablecer el color de fondo
+	                }
+	            	
+	                
+	                for (int i = 0; i < 6; i++) {
+	                    valores[i] = jTextIntroducido[i].getText();
 
-			/*
-	            if(datoProyecto != null && !datoProyecto.isEmpty()){
-	                model.addRow(new Object[]{idTrabajador, "Nombre", "Apellido", "Género", "Provincia", "Telefono", "Correo de empresa", "Sueldo"});
-	            }else{
-	                JOptionPane.showMessageDialog(null, "Por favor, introduce un ID válido");
-	            }*/	            	            
+	                    // Aplicar limitaciones específicas para cada campo
+	                    if (i == 0 && !valores[i].matches("\\d{4}")) { // ID (4 dígitos)
+	                        jTextIntroducido[i].setBackground(Color.PINK);
+	                        validar = false;
+	                    } else if (i == 1 && !valores[i].matches("[a-zA-Z]+")) { // Nombre (solo letras)
+	                        jTextIntroducido[i].setBackground(Color.PINK);
+	                        validar = false;
+	                    } else if (i == 2 && !valores[i].matches("\\d+")) { // numeroDeParticipante (solo numeros)
+	                        jTextIntroducido[i].setBackground(Color.PINK);
+	                        validar = false;
+	                    } else if (i == 3 && !valores[i].matches("\\d{2}/\\d{2}/\\d{4}")) { // fechaInicio (con formato dd/mm/yyyy)
+	                        jTextIntroducido[i].setBackground(Color.PINK);
+	                        validar = false;
+	                    } else if (i == 4 && !valores[i].matches("\\d{2}/\\d{2}/\\d{4}")) { // fehcaAcabadoEstimado (con formato dd/mm/yyyy)
+	                        jTextIntroducido[i].setBackground(Color.PINK);
+	                        validar = false;
+	                    } else if (i == 5 && !valores[i].matches("\\d+\\.\\d{2}")) { // gastos (numeros con dos decimales)
+	                        jTextIntroducido[i].setBackground(Color.PINK);
+	                        validar = false;
+	                    } else {
+	                        jTextIntroducido[i].setBackground(colorDefecto[i]);  // poner el fondo a blanco a los textfields corregidos
+	                    }  
+	                }
+
+	                if (validar) {
+	                    valores[7] = "Pendiente"; // Valor predeterminado para el Estado de Proyecto
+
+	                    model.addRow(valores);
+
+	                    // cierra la ventanilla
+	                    ventanillaAnyadir.dispose();
+	                } else {
+	                    // Mostrar un mensaje de error
+	                    JOptionPane.showMessageDialog(ventanillaAnyadir, "Los datos introducidos tienen algún fallo. Por favor, verifique los campos resaltados en rojo.");
+	                }
+	            }
+	            
+	        });
+	        //boton cancelar (solo cierra la ventanilla)
+	        botonCancelar.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		ventanillaAnyadir.dispose();
+	        	}
+	        });
+	        ventanillaAnyadir.add(panelDeDatos, BorderLayout.CENTER);
+	        ventanillaAnyadir.add(comboBoxPanel, BorderLayout.NORTH);
+	        ventanillaAnyadir.add(botonPanel, BorderLayout.SOUTH);
+	        
+	        
+	        ventanillaAnyadir.pack();
+	        ventanillaAnyadir.setVisible(true);
+	        ventanillaAnyadir.setLocationRelativeTo(null);
+		           	            
 		});
 		
 		
@@ -145,3 +214,4 @@ public class VentanaProyectos extends JPanel{
 }
 
 //cuando pones el raton encima aparece una lista de algo --> jdialog
+//loggers
