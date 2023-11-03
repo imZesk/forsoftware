@@ -164,7 +164,7 @@ public class VentanaProyectos extends JPanel{
 	                }
 
 	                if (validar) {
-	                    valores[7] = "Pendiente"; // Valor predeterminado para el Estado de Proyecto
+	                    valores[6] = "Pendiente"; // Valor predeterminado para el Estado de Proyecto
 
 	                    model.addRow(valores);
 
