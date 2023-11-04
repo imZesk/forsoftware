@@ -111,8 +111,8 @@ public class VentanaTrabajadores extends JPanel{
 	        JPanel panelDeDatos = new JPanel(new GridLayout(8, 2));
 	        JTextField[] jTextIntroducido = new JTextField[6];
 	        Color[] colorDefecto = new Color[6]; //para poner el fondo de nuevo en blanco
-	        String[] nomDatos = {"ID (4 dígitos)", "Nombre (solo letras)", "Apellido (solo letras)", "Género",
-	        		"Puesto", "Provincia (solo letras)", "Telefono (7 digitos)", "Correo de empresa", "Sueldo (solo numeros)"};
+	        String[] nomDatos = {"ID (4 dígitos)", "Nombre (solo letras)", "Apellido (solo letras)",
+	        "Provincia (solo letras)", "Telefono (9 digitos)", "Sueldo (numero con dos decimales)"};
 
 	        for (int pos = 0; pos < 6; pos++) {
 	            JLabel label = new JLabel(nomDatos[pos]);
@@ -130,7 +130,6 @@ public class VentanaTrabajadores extends JPanel{
 	        comboBoxPanel.add(labelGenero);
 	        comboBoxPanel.add(comboBoxGenero);
 	        
-	        JPanel comboBoxPanel2 = new JPanel();
 	        JLabel labelPuesto = new JLabel("Puesto:");
 	        JComboBox<Puesto> comboBoxPuesto = new JComboBox<>(Puesto.values());
 	        comboBoxPuesto.setSelectedItem(null);
@@ -149,6 +148,7 @@ public class VentanaTrabajadores extends JPanel{
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					String[] valores = new String[9];
 					boolean validar = true;
 					
 					Sexo sexo = (Sexo) comboBoxGenero.getSelectedItem();
@@ -159,25 +159,48 @@ public class VentanaTrabajadores extends JPanel{
 	                	comboBoxGenero.setBackground(Color.WHITE); // Restablecer el color de fondo
 	                }
 					
+					Puesto puesto = (Puesto) comboBoxPuesto.getSelectedItem();
+					if (puesto == null) {
+						comboBoxPuesto.setBackground(Color.PINK); // Marcar en rojo si no se selecciona un valor
+	                    validar = false;;
+	                } else {
+	                	comboBoxPuesto.setBackground(Color.WHITE); // Restablecer el color de fondo
+	                }
 					
-					String idTrabajador = JOptionPane.showInputDialog("Introduce el ID del trabajador");
-		            while(idTrabajador != null && !idTrabajador.matches("\\d{4}")) {
-		                JOptionPane.showMessageDialog(null, "Por favor, introduce un ID válido (exactamente 4 dígitos)");
-		                idTrabajador = JOptionPane.showInputDialog("Introduce el ID del trabajador");
-		            }
 					
 					
+					String[] limitaciones = {"\\d{4}", "[a-zA-Z ]+", "[a-zA-Z ]+", "[a-zA-Z ]+", "\\d{9}", "\\d+\\.\\d{2}"};
+
+			        for (int i = 0; i < 6; i++) {
+			            valores[i] = jTextIntroducido[i].getText();
+
+			            // Aplicar la limitación correspondiente para cada campo
+			            if (!valores[i].matches(limitaciones[i])) {
+			                jTextIntroducido[i].setBackground(Color.PINK);
+			                validar = false;
+			            } else {
+			                jTextIntroducido[i].setBackground(colorDefecto[i]);
+			            }
+			        }
+
+			        if (validar) {
+			            valores[7] = valores[1] + "." + valores[2] + "@forsoftware.es";
+			            model.addRow(new Object[]{valores[0], valores[1], valores[2], sexo, puesto, valores[3], valores[4], valores[1] + "." + valores[2] + "@forsoftware.es", valores[5]});
+			            ventanillaAnyadir.dispose();
+			        } else {
+			            JOptionPane.showMessageDialog(ventanillaAnyadir, "Los datos introducidos tienen algún fallo. Por favor, verifique los campos resaltados en rojo.");
+			        }
 					
 					
 				}
 			});
 	        
-	        
-	        
-	        
-	        
-	        
-	        
+	        botonCancelar.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		ventanillaAnyadir.dispose();
+	        	}
+	        });
+	         
 	        
 	        ventanillaAnyadir.add(panelDeDatos, BorderLayout.CENTER);
 	        ventanillaAnyadir.add(comboBoxPanel, BorderLayout.NORTH);
