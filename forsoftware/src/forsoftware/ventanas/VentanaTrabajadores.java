@@ -1,11 +1,17 @@
 package forsoftware.ventanas;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import forsoftware.clases.Proyectos.TipoDeProyecto;
+import forsoftware.clases.Trabajador.Puesto;
+import forsoftware.clases.Trabajador.Sexo;
 
 public class VentanaTrabajadores extends JPanel{
 
@@ -94,6 +100,71 @@ public class VentanaTrabajadores extends JPanel{
         });
         
         botonAnyadir.addActionListener(e ->{
+        	
+        	JDialog ventanillaAnyadir = new JDialog();
+	        ventanillaAnyadir.setTitle("Ingresar Datos del Trabajador");
+	        ventanillaAnyadir.setLayout(new BorderLayout());
+
+	        // Campos de entrada
+	        JPanel panelDeDatos = new JPanel(new GridLayout(8, 2));
+	        JTextField[] jTextIntroducido = new JTextField[6];
+	        Color[] colorDefecto = new Color[6]; //para poner el fondo de nuevo en blanco
+	        String[] nomDatos = {"ID (4 dígitos)", "Nombre (solo letras)", "Apellido (solo letras)", "Género",
+	        		"Puesto", "Provincia (solo letras)", "Telefono (7 digitos)", "Correo de empresa", "Sueldo (solo numeros)"};
+
+	        for (int pos = 0; pos < 6; pos++) {
+	            JLabel label = new JLabel(nomDatos[pos]);
+	            jTextIntroducido[pos] = new JTextField();
+	            colorDefecto[pos] = jTextIntroducido[pos].getBackground(); // guardar el color defecto(blanco)
+	            panelDeDatos.add(label);
+	            panelDeDatos.add(jTextIntroducido[pos]);
+	        }
+        	
+	        //combobox para escoger el sexo del trabajador
+	        JPanel comboBoxPanel = new JPanel();
+	        JLabel labelGenero = new JLabel("Género:");
+	        JComboBox<Sexo> comboBoxGenero = new JComboBox<>(Sexo.values());
+	        comboBoxGenero.setSelectedItem(null);
+	        comboBoxPanel.add(labelGenero);
+	        comboBoxPanel.add(comboBoxGenero);
+	        
+	        JPanel comboBoxPanel2 = new JPanel();
+	        JLabel labelPuesto = new JLabel("Puesto:");
+	        JComboBox<Puesto> comboBoxPuesto = new JComboBox<>(Puesto.values());
+	        comboBoxPuesto.setSelectedItem(null);
+	        comboBoxPanel.add(labelPuesto);
+	        comboBoxPanel.add(comboBoxPuesto);
+	        
+	        //parte de los botones
+	        JPanel botonPanel = new JPanel(); 
+	        JButton botonAceptar = new JButton("Aceptar");
+	        JButton botonCancelar = new JButton("Cancelar");
+	        botonPanel.add(botonAceptar);
+	        botonPanel.add(botonCancelar);
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        ventanillaAnyadir.add(panelDeDatos, BorderLayout.CENTER);
+	        ventanillaAnyadir.add(comboBoxPanel, BorderLayout.NORTH);
+	        ventanillaAnyadir.add(botonPanel, BorderLayout.SOUTH);
+	        
+	        
+	        ventanillaAnyadir.pack();
+	        ventanillaAnyadir.setVisible(true);
+	        ventanillaAnyadir.setLocationRelativeTo(null);
+	        
+	        
+	        
+        	/*
+        	
             String idTrabajador = JOptionPane.showInputDialog("Introduce el ID del trabajador");
             while(idTrabajador != null && !idTrabajador.matches("\\d{4}")) {
                 JOptionPane.showMessageDialog(null, "Por favor, introduce un ID válido (exactamente 4 dígitos)");
@@ -143,6 +214,8 @@ public class VentanaTrabajadores extends JPanel{
             }else{
                 JOptionPane.showMessageDialog(null, "Por favor, introduce datos válidos");
             }
+            
+            */
         });
 
 
