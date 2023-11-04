@@ -2,6 +2,8 @@ package forsoftware.ventanas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -143,7 +145,32 @@ public class VentanaTrabajadores extends JPanel{
 	        botonPanel.add(botonCancelar);
 	        
 	        
-	        
+	        botonAceptar.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					boolean validar = true;
+					
+					Sexo sexo = (Sexo) comboBoxGenero.getSelectedItem();
+					if (sexo == null) {
+						comboBoxGenero.setBackground(Color.PINK); // Marcar en rojo si no se selecciona un valor
+	                    validar = false;;
+	                } else {
+	                	comboBoxGenero.setBackground(Color.WHITE); // Restablecer el color de fondo
+	                }
+					
+					
+					String idTrabajador = JOptionPane.showInputDialog("Introduce el ID del trabajador");
+		            while(idTrabajador != null && !idTrabajador.matches("\\d{4}")) {
+		                JOptionPane.showMessageDialog(null, "Por favor, introduce un ID válido (exactamente 4 dígitos)");
+		                idTrabajador = JOptionPane.showInputDialog("Introduce el ID del trabajador");
+		            }
+					
+					
+					
+					
+				}
+			});
 	        
 	        
 	        
