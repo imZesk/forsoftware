@@ -121,11 +121,10 @@ public class VentanaProyectos extends JPanel{
 
 	        botonAceptar.addActionListener(new ActionListener() { //combrobar la validez de los datos introcucidos
 	            public void actionPerformed(ActionEvent e) {
-	            	
-	            	String[] valores = new String[7];
+	            	String[] valores = new String[nomDatos.length];
 	            	boolean validar = true;
-	               
-	                   
+	            	
+	
 	            	TipoDeProyecto tipoProyecto = (TipoDeProyecto) comboBoxTipoProyecto.getSelectedItem();
 
 	            	if (tipoProyecto == null) {
@@ -135,7 +134,7 @@ public class VentanaProyectos extends JPanel{
 	                    comboBoxTipoProyecto.setBackground(Color.WHITE); // Restablecer el color de fondo
 	                }
 	            	
-	                
+	               
 	                for (int i = 0; i < 6; i++) {
 	                    valores[i] = jTextIntroducido[i].getText();
 
@@ -160,13 +159,13 @@ public class VentanaProyectos extends JPanel{
 	                        validar = false;
 	                    } else {
 	                        jTextIntroducido[i].setBackground(colorDefecto[i]);  // poner el fondo a blanco a los textfields corregidos
-	                    }  
+	                    } 
 	                }
 
 	                if (validar) {
-	                    valores[6] = "Pendiente"; // Valor predeterminado para el Estado de Proyecto
+	                    String estado = "Pendiente"; // Valor predeterminado para el Estado de Proyecto
 
-	                    model.addRow(valores);
+	                    model.addRow(new Object[]{valores[0], valores[1], valores[2], valores[3], valores[4], valores[5], tipoProyecto, estado});
 
 	                    // cierra la ventanilla
 	                    ventanillaAnyadir.dispose();
