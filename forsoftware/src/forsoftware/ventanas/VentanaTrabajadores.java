@@ -11,7 +11,6 @@ import java.io.IOException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import forsoftware.clases.Proyectos.TipoDeProyecto;
 import forsoftware.clases.Trabajador.Puesto;
 import forsoftware.clases.Trabajador.Sexo;
 
@@ -114,7 +113,7 @@ public class VentanaTrabajadores extends JPanel{
 	        String[] nomDatos = {"ID (4 dígitos)", "Nombre (solo letras)", "Apellido (solo letras)",
 	        "Provincia (solo letras)", "Telefono (9 digitos)", "Sueldo (numero con dos decimales)"};
 
-	        for (int pos = 0; pos < 6; pos++) {
+	        for (int pos = 0; pos < nomDatos.length; pos++) {
 	            JLabel label = new JLabel(nomDatos[pos]);
 	            jTextIntroducido[pos] = new JTextField();
 	            colorDefecto[pos] = jTextIntroducido[pos].getBackground(); // guardar el color defecto(blanco)
@@ -148,7 +147,7 @@ public class VentanaTrabajadores extends JPanel{
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					String[] valores = new String[9];
+					String[] valores = new String[nomDatos.length];
 					boolean validar = true;
 					
 					Sexo sexo = (Sexo) comboBoxGenero.getSelectedItem();
@@ -171,7 +170,7 @@ public class VentanaTrabajadores extends JPanel{
 					
 					String[] limitaciones = {"\\d{4}", "[a-zA-Z ]+", "[a-zA-Z ]+", "[a-zA-Z ]+", "\\d{9}", "\\d+\\.\\d{2}"};
 
-			        for (int i = 0; i < 6; i++) {
+			        for (int i = 0; i < nomDatos.length; i++) {
 			            valores[i] = jTextIntroducido[i].getText();
 
 			            // Aplicar la limitación correspondiente para cada campo
@@ -184,8 +183,8 @@ public class VentanaTrabajadores extends JPanel{
 			        }
 
 			        if (validar) {
-			            valores[7] = valores[1] + "." + valores[2] + "@forsoftware.es";
-			            model.addRow(new Object[]{valores[0], valores[1], valores[2], sexo, puesto, valores[3], valores[4], valores[1] + "." + valores[2] + "@forsoftware.es", valores[5]});
+			            String correo = valores[1] + "." + valores[2] + "@forsoftware.es";
+			            model.addRow(new Object[]{valores[0], valores[1], valores[2], sexo, puesto, valores[3], valores[4], correo, valores[5]});
 			            ventanillaAnyadir.dispose();
 			        } else {
 			            JOptionPane.showMessageDialog(ventanillaAnyadir, "Los datos introducidos tienen algún fallo. Por favor, verifique los campos resaltados en rojo.");
@@ -211,61 +210,6 @@ public class VentanaTrabajadores extends JPanel{
 	        ventanillaAnyadir.setVisible(true);
 	        ventanillaAnyadir.setLocationRelativeTo(null);
 	        
-	        
-	        
-        	/*
-        	
-            String idTrabajador = JOptionPane.showInputDialog("Introduce el ID del trabajador");
-            while(idTrabajador != null && !idTrabajador.matches("\\d{4}")) {
-                JOptionPane.showMessageDialog(null, "Por favor, introduce un ID válido (exactamente 4 dígitos)");
-                idTrabajador = JOptionPane.showInputDialog("Introduce el ID del trabajador");
-            }
-
-            String nombre = JOptionPane.showInputDialog("Introduce el nombre del trabajador");
-            while(nombre != null && !nombre.matches("[a-zA-Z]+")) {
-                JOptionPane.showMessageDialog(null, "Por favor, introduce un nombre válido (solo letras)");
-                nombre = JOptionPane.showInputDialog("Introduce el nombre del trabajador");
-            }
-
-            String apellido = JOptionPane.showInputDialog("Introduce el apellido del trabajador");
-            while(apellido != null && !apellido.matches("[a-zA-Z]+")) {
-                JOptionPane.showMessageDialog(null, "Por favor, introduce un apellido válido (solo letras)");
-                apellido = JOptionPane.showInputDialog("Introduce el apellido del trabajador");
-            }
-
-            Object[] generos = {"Hombre", "Mujer", "Otros"};
-            String sexo = (String)JOptionPane.showInputDialog(null, "Selecciona el género", "Género", JOptionPane.QUESTION_MESSAGE, null, generos, generos[0]);
-
-            Object[] puestos = {"Programador", "Modelador", "GameDesigner", "Artista", "Escritor", "Video", "Sonido"};
-            String puesto = (String)JOptionPane.showInputDialog(null, "Selecciona el puesto", "Puesto", JOptionPane.QUESTION_MESSAGE, null, puestos, puestos[0]);
-
-            String provincia = JOptionPane.showInputDialog("Introduce la provincia del trabajador");
-            while(provincia != null && !provincia.matches("[a-zA-Z]+")) {
-                JOptionPane.showMessageDialog(null, "Por favor, introduce una provincia válida (solo letras)");
-                provincia = JOptionPane.showInputDialog("Introduce la provincia del trabajador");
-            }
-            
-            String telefono = JOptionPane.showInputDialog("Introduce el teléfono del trabajador");
-            while(telefono != null && !telefono.matches("\\d{9}")) {
-                JOptionPane.showMessageDialog(null, "Por favor, introduce un teléfono válido (exactamente 9 dígitos)");
-                telefono = JOptionPane.showInputDialog("Introduce el teléfono del trabajador");
-            }
-
-            String sueldo = JOptionPane.showInputDialog("Introduce el sueldo del trabajador");
-            while(sueldo != null && !sueldo.matches("\\d+")) {
-                JOptionPane.showMessageDialog(null, "Por favor, introduce un sueldo válido (solo números)");
-                sueldo = JOptionPane.showInputDialog("Introduce el sueldo del trabajador");
-            }
-
-            String correoEmpresa = nombre + "." + apellido + "@forsoftware.es";
-
-            if(idTrabajador != null && nombre != null && apellido != null && sexo != null && puesto != null && provincia != null && telefono != null && sueldo != null){
-                model.addRow(new Object[]{idTrabajador, nombre, apellido, sexo, puesto, provincia, telefono, correoEmpresa, sueldo});
-            }else{
-                JOptionPane.showMessageDialog(null, "Por favor, introduce datos válidos");
-            }
-            
-            */
         });
 
 
