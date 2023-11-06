@@ -253,6 +253,7 @@ public class VentanaTrabajadores extends JPanel{
             	           
             	        }
             	        jTextIntroducido[5].setEditable(false);
+            	        jTextIntroducido[0].setEditable(false);
 
             	        JPanel comboBoxPanel = new JPanel();
             	        JLabel labelGenero = new JLabel("Género:");
