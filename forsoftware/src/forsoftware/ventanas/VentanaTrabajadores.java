@@ -211,6 +211,90 @@ public class VentanaTrabajadores extends JPanel{
 	        ventanillaAnyadir.setLocationRelativeTo(null);
 	        
         });
+        
+        JButton botonEditar = new JButton("Editar trabajador"); 
+        panelBotones.add(botonEditar); 
+
+        botonEditar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	 int filaSeleccionada = tabla.getSelectedRow();
+            	    if (filaSeleccionada != -1) {
+            	    	JDialog ventanillaEditar = new JDialog();
+            	        ventanillaEditar.setTitle("Editar Datos del Trabajador");
+            	        ventanillaEditar.setLayout(new BorderLayout());
+
+            	        // Tus campos de entrada aquí
+            	        // ...
+            	        JPanel panelDeDatos = new JPanel(new GridLayout(9, 2));
+            	        JTextField[] jTextIntroducido = new JTextField[7];
+            	        Color[] colorDefecto = new Color[7]; //para poner el fondo de nuevo en blanco
+            	        String[] nomDatos = {"ID (4 dígitos)", "Nombre (solo letras)", "Apellido (solo letras)",
+            	        "Provincia (solo letras)", "Telefono (9 digitos)", "Correo de empresa", "Sueldo (numero con dos decimales)"};
+
+            	        for (int pos = 0; pos < nomDatos.length; pos++) {
+            	            JLabel label = new JLabel(nomDatos[pos]);
+            	            jTextIntroducido[pos] = new JTextField();
+            	            colorDefecto[pos] = jTextIntroducido[pos].getBackground(); // guardar el color defecto(blanco)
+            	            panelDeDatos.add(label);
+            	            panelDeDatos.add(jTextIntroducido[pos]);
+            	        }
+
+            	        // Rellenar los campos de entrada con los datos del trabajador seleccionado
+            	        for (int pos = 0; pos < nomDatos.length; pos++) {
+            	        	
+            	            jTextIntroducido[0].setText((String) tabla.getValueAt(filaSeleccionada, 0));
+            	            jTextIntroducido[1].setText((String) tabla.getValueAt(filaSeleccionada, 1));
+            	            jTextIntroducido[2].setText((String) tabla.getValueAt(filaSeleccionada, 2));
+            	            jTextIntroducido[3].setText((String) tabla.getValueAt(filaSeleccionada, 5));
+            	            jTextIntroducido[4].setText((String) tabla.getValueAt(filaSeleccionada, 6));
+            	            jTextIntroducido[5].setText((String) tabla.getValueAt(filaSeleccionada, 7));
+            	            jTextIntroducido[6].setText((String) tabla.getValueAt(filaSeleccionada, 8));
+            	           
+            	        }
+
+            	        // Tus JComboBox aquí
+            	        // ...
+            	        JPanel comboBoxPanel = new JPanel();
+            	        JLabel labelGenero = new JLabel("Género:");
+            	        JComboBox<Sexo> comboBoxGenero = new JComboBox<>(Sexo.values());
+            	        comboBoxGenero.setSelectedItem(null);
+            	        comboBoxPanel.add(labelGenero);
+            	        comboBoxPanel.add(comboBoxGenero);
+            	        
+            	        JLabel labelPuesto = new JLabel("Puesto:");
+            	        JComboBox<Puesto> comboBoxPuesto = new JComboBox<>(Puesto.values());
+            	        comboBoxPuesto.setSelectedItem(null);
+            	        comboBoxPanel.add(labelPuesto);
+            	        comboBoxPanel.add(comboBoxPuesto);
+            	        
+            	        
+
+            	        // Rellenar los JComboBox con los datos del trabajador seleccionado
+            	        comboBoxGenero.setSelectedItem(tabla.getValueAt(filaSeleccionada, 3));
+            	        comboBoxPuesto.setSelectedItem(tabla.getValueAt(filaSeleccionada, 4));
+
+            	        // Tus botones aquí
+            	        // ...
+            	        JPanel botonPanel = new JPanel(); 
+            	        JButton botonAceptar = new JButton("Aceptar");
+            	        JButton botonCancelar = new JButton("Cancelar");
+            	        botonPanel.add(botonAceptar);
+            	        botonPanel.add(botonCancelar);
+            	        
+            	        ventanillaEditar.add(panelDeDatos, BorderLayout.CENTER);
+            	        ventanillaEditar.add(comboBoxPanel, BorderLayout.NORTH);
+            	        ventanillaEditar.add(botonPanel, BorderLayout.SOUTH);
+
+            	        ventanillaEditar.pack();
+            	        ventanillaEditar.setVisible(true);
+            	        ventanillaEditar.setLocationRelativeTo(null);
+            	    } else {
+            	        JOptionPane.showMessageDialog(null, "Por favor, selecciona un trabajador para editar");
+            	    }
+            }
+        });
+
 
 
     }
