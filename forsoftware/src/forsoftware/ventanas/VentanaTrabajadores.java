@@ -31,7 +31,7 @@ public class VentanaTrabajadores extends JPanel{
                 {"1112", "Juan", "Pérez", "hombre", "programador", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
                 {"1112", "Juan", "Pérez", "hombre", "programador", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
                 {"1112", "Juan", "Pérez", "hombre", "programador", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-                {"1112", "Juan", "Pérez", "hombre", "programador", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
+                {"1112", "Juan", "Perez", "hombre", "programador", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
             };
 
         
@@ -258,29 +258,80 @@ public class VentanaTrabajadores extends JPanel{
             	        JPanel comboBoxPanel = new JPanel();
             	        JLabel labelGenero = new JLabel("Género:");
             	        JComboBox<Sexo> comboBoxGenero = new JComboBox<>(Sexo.values());
-            	        comboBoxGenero.setSelectedItem(null);
+            	        comboBoxGenero.setSelectedItem(tabla.getValueAt(filaSeleccionada, 3));
             	        comboBoxPanel.add(labelGenero);
             	        comboBoxPanel.add(comboBoxGenero);
             	        
             	        JLabel labelPuesto = new JLabel("Puesto:");
             	        JComboBox<Puesto> comboBoxPuesto = new JComboBox<>(Puesto.values());
-            	        comboBoxPuesto.setSelectedItem(null);
+            	        comboBoxPuesto.setSelectedItem(tabla.getValueAt(filaSeleccionada, 4));
             	        comboBoxPanel.add(labelPuesto);
             	        comboBoxPanel.add(comboBoxPuesto);
-            	        
-            	        
 
-            	        // Rellenar los JComboBox con los datos del trabajador seleccionado
-            	        comboBoxGenero.setSelectedItem(tabla.getValueAt(filaSeleccionada, 3));
-            	        comboBoxPuesto.setSelectedItem(tabla.getValueAt(filaSeleccionada, 4));
-
-            	        // Tus botones aquí
-            	        // ...
             	        JPanel botonPanel = new JPanel(); 
             	        JButton botonAceptar = new JButton("Aceptar");
             	        JButton botonCancelar = new JButton("Cancelar");
             	        botonPanel.add(botonAceptar);
             	        botonPanel.add(botonCancelar);
+            	        
+            	        botonAceptar.addActionListener(new ActionListener() {
+            				
+            				@Override
+            				public void actionPerformed(ActionEvent e) {
+            					String[] valores = new String[nomDatos.length];
+            					boolean validar = true;
+            					
+            					Sexo sexo = (Sexo) comboBoxGenero.getSelectedItem();
+            					if (sexo == null) {
+            						comboBoxGenero.setBackground(Color.PINK); // Marcar en rojo si no se selecciona un valor
+            	                    validar = false;;
+            	                } else {
+            	                	comboBoxGenero.setBackground(Color.WHITE); // Restablecer el color de fondo
+            	                }
+            					
+            					Puesto puesto = (Puesto) comboBoxPuesto.getSelectedItem();
+            					if (puesto == null) {
+            						comboBoxPuesto.setBackground(Color.PINK); // Marcar en rojo si no se selecciona un valor
+            	                    validar = false;;
+            	                } else {
+            	                	comboBoxPuesto.setBackground(Color.WHITE); // Restablecer el color de fondo
+            	                }
+            					
+            					
+            					
+            					String[] limitaciones = {"\\d{4}", "[a-zA-Z ]+", "[a-zA-Z ]+", "[a-zA-Z ]+", "\\d{9}", ".*", "\\d+\\.\\d{2}"};
+
+            			        for (int i = 0; i < nomDatos.length; i++) {
+            			            valores[i] = jTextIntroducido[i].getText();
+
+            			            // Aplicar la limitación correspondiente para cada campo
+            			            if (!valores[i].matches(limitaciones[i])) {
+            			                jTextIntroducido[i].setBackground(Color.PINK);
+            			                validar = false;
+            			            } else {
+            			                jTextIntroducido[i].setBackground(colorDefecto[i]);
+            			            }
+            			        }
+
+            			        if (validar) {
+            			            String correo = valores[1] + "." + valores[2] + "@forsoftware.es";
+            			            model.removeRow(filaSeleccionada);
+            			            model.addRow(new Object[]{valores[0], valores[1], valores[2], sexo, puesto, valores[3], valores[4], correo, valores[6]});
+            			            ventanillaEditar.dispose();
+            			        } else {
+            			            JOptionPane.showMessageDialog(ventanillaEditar, "Los datos introducidos tienen algún fallo. Por favor, verifique los campos resaltados en rojo.");
+            			        }
+            					
+            					
+            				}
+            			});
+            	        
+            	        botonCancelar.addActionListener(new ActionListener() {
+            	        	public void actionPerformed(ActionEvent e) {
+            	        		ventanillaEditar.dispose();
+            	        	}
+            	        });
+            	        
             	        
             	        ventanillaEditar.add(panelDeDatos, BorderLayout.CENTER);
             	        ventanillaEditar.add(comboBoxPanel, BorderLayout.NORTH);
