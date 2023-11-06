@@ -20,7 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
+import forsoftware.clases.Proyectos.EstadoProyecto;
 import forsoftware.clases.Proyectos.TipoDeProyecto;
+
 
 public class VentanaProyectos extends JPanel{
 
@@ -58,10 +60,12 @@ public class VentanaProyectos extends JPanel{
 
 		JButton botonAnyadir = new JButton("Añadir Proyecto");
 		JButton botonEliminar = new JButton("Anular Proyecto");
-		JButton botonFinalizado = new JButton("Finalizar Proyecto"); //al pulsar este boton hace q el proyecto q esta en estado pendiente se convierta en finalizado
+		JButton botonEditar = new JButton("Editar proyecto");
+		
 		panelBotones.add(botonAnyadir);
 		panelBotones.add(botonEliminar);
-		panelBotones.add(botonFinalizado);
+		panelBotones.add(botonEditar);
+
 
 		setLayout(new BorderLayout());
 		add(scrollPane, BorderLayout.CENTER);
@@ -77,6 +81,151 @@ public class VentanaProyectos extends JPanel{
 			}
 
 		});
+		
+		//----------------------------------------------------------------------------------------------------
+		//Funcion del botonEditar-----------------------------------------------------------------------------
+        botonEditar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	 int filaSeleccionada = tabla.getSelectedRow();
+            	    if (filaSeleccionada != -1) {
+            	    	JDialog ventanillaEditar = new JDialog();
+            	        ventanillaEditar.setTitle("Editar Datos del Proyecto");
+            	        ventanillaEditar.setLayout(new BorderLayout());
+
+            	        // Tus campos de entrada aquí
+            	        // ...
+            	        JPanel panelDeDatos = new JPanel(new GridLayout(8, 2));
+            	        JTextField[] jTextIntroducido = new JTextField[6];
+            	        Color[] colorDefecto = new Color[6]; //para poner el fondo de nuevo en blanco
+            	        String[] nomDatos = {"ID (4 dígitos)", "Nombre (solo letras)", "Número de Participante", "Fecha de Inicio",
+            	        		"Fecha de Acabado Estimado", "Gastos (dos decimales)"};
+
+            	        for (int pos = 0; pos < nomDatos.length; pos++) {
+            	            JLabel label = new JLabel(nomDatos[pos]);
+            	            jTextIntroducido[pos] = new JTextField();
+            	            colorDefecto[pos] = jTextIntroducido[pos].getBackground(); // guardar el color defecto(blanco)
+            	            panelDeDatos.add(label);
+            	            panelDeDatos.add(jTextIntroducido[pos]);
+            	        }
+
+            	        // Rellenar los campos de entrada con los datos del proyecto seleccionado
+            	        for (int pos = 0; pos < nomDatos.length; pos++) {
+            	        	
+            	            jTextIntroducido[0].setText((String) tabla.getValueAt(filaSeleccionada, 0));
+            	            jTextIntroducido[1].setText((String) tabla.getValueAt(filaSeleccionada, 1));
+            	            jTextIntroducido[2].setText((String) tabla.getValueAt(filaSeleccionada, 2));
+            	            jTextIntroducido[3].setText((String) tabla.getValueAt(filaSeleccionada, 3));
+            	            jTextIntroducido[4].setText((String) tabla.getValueAt(filaSeleccionada, 4));
+            	            jTextIntroducido[5].setText((String) tabla.getValueAt(filaSeleccionada, 5));
+
+            	           
+            	        }
+            	        jTextIntroducido[0].setEditable(false);
+
+            	        JPanel comboBoxPanel = new JPanel();
+            	        JLabel labelTipo = new JLabel("Tipo de Proyecto:");
+            	        JComboBox<TipoDeProyecto> comboBoxTipo = new JComboBox<>(TipoDeProyecto.values());
+            	        comboBoxTipo.setSelectedItem(tabla.getValueAt(filaSeleccionada, 7));
+            	        comboBoxPanel.add(labelTipo);
+            	        comboBoxPanel.add(comboBoxTipo);
+            	        
+            	        JLabel labelEstado = new JLabel("Estado del proyecto:");
+            	        JComboBox<EstadoProyecto> comboBoxEstado = new JComboBox<>(EstadoProyecto.values());
+            	        comboBoxEstado.setSelectedItem(tabla.getValueAt(filaSeleccionada, 6));
+            	        comboBoxPanel.add(labelEstado);
+            	        comboBoxPanel.add(comboBoxEstado);
+
+            	        JPanel botonPanel = new JPanel(); 
+            	        JButton botonAceptar = new JButton("Aceptar");
+            	        JButton botonCancelar = new JButton("Cancelar");
+            	        botonPanel.add(botonAceptar);
+            	        botonPanel.add(botonCancelar);
+            	        
+            	        botonAceptar.addActionListener(new ActionListener() {
+            				
+            				@Override
+            				public void actionPerformed(ActionEvent e) {
+            					String[] valores = new String[nomDatos.length];
+            					boolean validar = true;
+            					
+            					TipoDeProyecto TipoProyecto = (TipoDeProyecto) comboBoxTipo.getSelectedItem();
+            					if (TipoProyecto == null) {
+            						comboBoxTipo.setBackground(Color.PINK); // Marcar en rojo si no se selecciona un valor
+            	                    validar = false;;
+            	                } else {
+            	                	comboBoxTipo.setBackground(Color.WHITE); // Restablecer el color de fondo
+            	                }
+            					
+            					EstadoProyecto EstadoProyect = (EstadoProyecto) comboBoxEstado.getSelectedItem();
+            					if (EstadoProyect == null) {
+            						comboBoxEstado.setBackground(Color.PINK); // Marcar en rojo si no se selecciona un valor
+            	                    validar = false;;
+            	                } else {
+            	                	comboBoxEstado.setBackground(Color.WHITE); // Restablecer el color de fondo
+            	                }
+            					
+				
+            					for (int i = 0; i < 6; i++) {
+            						valores[i] = jTextIntroducido[i].getText();
+
+            						// Aplicar limitaciones específicas para cada campo
+            						if (i == 0 && !valores[i].matches("\\d{4}")) { // ID (4 dígitos)
+            							jTextIntroducido[i].setBackground(Color.PINK);
+            							validar = false;
+            						} else if (i == 1 && !valores[i].matches("[a-zA-Z0-9]+")) { // Nombre (solo letras)
+            							jTextIntroducido[i].setBackground(Color.PINK);
+            							validar = false;
+            						} else if (i == 2 && !valores[i].matches("\\d+")) { // numeroDeParticipante (solo numeros)
+            							jTextIntroducido[i].setBackground(Color.PINK);
+            							validar = false;
+            						} else if (i == 3 && !valores[i].matches("\\d{2}/\\d{2}/\\d{4}")) { // fechaInicio (con formato dd/mm/yyyy)
+            							jTextIntroducido[i].setBackground(Color.PINK);
+            							validar = false;
+            						} else if (i == 4 && !valores[i].matches("\\d{2}/\\d{2}/\\d{4}")) { // fehcaAcabadoEstimado (con formato dd/mm/yyyy)
+            							jTextIntroducido[i].setBackground(Color.PINK);
+            							validar = false;
+            						} else if (i == 5 && !valores[i].matches("\\d+\\.\\d{2}")) { // gastos (numeros con dos decimales)
+            							jTextIntroducido[i].setBackground(Color.PINK);
+            							validar = false;
+            						} else {
+            							jTextIntroducido[i].setBackground(colorDefecto[i]);  // poner el fondo a blanco a los textfields corregidos
+            						} 
+            					}
+
+            					if (validar) {
+            			            model.removeRow(filaSeleccionada);
+            			            model.addRow(new Object[]{valores[0], valores[1], valores[2], valores[3], valores[4], valores[5], TipoProyecto, EstadoProyect});
+
+            			            ventanillaEditar.dispose();
+            			        } else {
+            			            JOptionPane.showMessageDialog(ventanillaEditar, "Los datos introducidos tienen algún fallo. Por favor, verifique los campos resaltados en rojo.");
+            			        }
+            					
+            					
+            				}
+            			});
+            	        
+            	        botonCancelar.addActionListener(new ActionListener() {
+            	        	public void actionPerformed(ActionEvent e) {
+            	        		ventanillaEditar.dispose();
+            	        	}
+            	        });
+            	        
+            	        
+            	        ventanillaEditar.add(panelDeDatos, BorderLayout.CENTER);
+            	        ventanillaEditar.add(comboBoxPanel, BorderLayout.NORTH);
+            	        ventanillaEditar.add(botonPanel, BorderLayout.SOUTH);
+
+            	        ventanillaEditar.pack();
+            	        ventanillaEditar.setVisible(true);
+            	        ventanillaEditar.setLocationRelativeTo(null);
+            	    } else {
+            	        JOptionPane.showMessageDialog(null, "Por favor, selecciona un proyecto para editar");
+            	    }
+            }
+        });
+		
 		
 		//----------------------------------------------------------------------------------------------------
 		//Funcion del botonAnyadir----------------------------------------------------------------------------
@@ -142,7 +291,7 @@ public class VentanaProyectos extends JPanel{
 	                    if (i == 0 && !valores[i].matches("\\d{4}")) { // ID (4 dígitos)
 	                        jTextIntroducido[i].setBackground(Color.PINK);
 	                        validar = false;
-	                    } else if (i == 1 && !valores[i].matches("[a-zA-Z]+")) { // Nombre (solo letras)
+	                    } else if (i == 1 && !valores[i].matches("[a-zA-Z0-9]+")) { // Nombre (solo letras)
 	                        jTextIntroducido[i].setBackground(Color.PINK);
 	                        validar = false;
 	                    } else if (i == 2 && !valores[i].matches("\\d+")) { // numeroDeParticipante (solo numeros)
@@ -193,22 +342,7 @@ public class VentanaProyectos extends JPanel{
 		           	            
 		});
 		
-		
-		
-		botonFinalizado.addActionListener(e -> {
-			int filaSeleccionada = tabla.getSelectedRow();
-		    if(filaSeleccionada >= 0){
-		        String estado = model.getValueAt(filaSeleccionada, 7).toString();
-		        if(estado.equalsIgnoreCase("pendiente")){
-		            model.setValueAt("finalizado", filaSeleccionada, 7);
-		        }else{
-		            JOptionPane.showMessageDialog(null, "El proyecto ya está finalizado");
-		        }
-		    }else{
-		        JOptionPane.showMessageDialog(null, "Por favor, selecciona una fila primero");
-		    }
-			
-		});
+
 	}
 }
 

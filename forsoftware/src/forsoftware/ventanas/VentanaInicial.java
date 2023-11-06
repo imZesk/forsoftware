@@ -182,7 +182,7 @@ public class VentanaInicial extends JFrame {
         // Configurar ventana
         setTitle("Bienvenido, [] - ForSoftware");
         setSize(1200, 500);
-        setLocationRelativeTo(null); //centrar la ventana a la pantalla
+        setLocationRelativeTo(null);//centrar la ventana a la pantalla
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
