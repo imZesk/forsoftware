@@ -252,9 +252,8 @@ public class VentanaTrabajadores extends JPanel{
             	            jTextIntroducido[6].setText((String) tabla.getValueAt(filaSeleccionada, 8));
             	           
             	        }
+            	        jTextIntroducido[5].setEditable(false);
 
-            	        // Tus JComboBox aquí
-            	        // ...
             	        JPanel comboBoxPanel = new JPanel();
             	        JLabel labelGenero = new JLabel("Género:");
             	        JComboBox<Sexo> comboBoxGenero = new JComboBox<>(Sexo.values());
