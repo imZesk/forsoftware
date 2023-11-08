@@ -164,8 +164,7 @@ public class VentanaTrabajadores extends JPanel{
 	                } else {
 	                	comboBoxPuesto.setBackground(Color.WHITE); // Restablecer el color de fondo
 	                }
-					
-					
+		
 					
 					String[] limitaciones = {"\\d{4}", "[a-zA-Z ]+", "[a-zA-Z ]+", "[a-zA-Z ]+", "\\d{9}", "\\d+\\.\\d{2}"};
 
@@ -185,8 +184,9 @@ public class VentanaTrabajadores extends JPanel{
 			            String correo = valores[1] + "." + valores[2] + "@forsoftware.es";
 			            Object[] DatosFila = new Object[] {valores[0], valores[1], valores[2], sexo, puesto, valores[3], valores[4], correo, valores[5]};
 			            model.addRow(DatosFila);
+			            
+			            
 			            try (BufferedWriter writer = new BufferedWriter(new FileWriter(fichero, true))) {
-			                // Formatea los datos del nuevo trabajador como una línea CSV y escríbelos en el archivo
 			                StringBuilder csvLine = new StringBuilder();
 			                for (int i = 0; i < DatosFila.length; i++) {
 			                    csvLine.append(DatosFila[i].toString());
@@ -200,6 +200,8 @@ public class VentanaTrabajadores extends JPanel{
 			                ex.printStackTrace();
 			                JOptionPane.showMessageDialog(ventanillaAnyadir, "Error al escribir en el archivo CSV.");
 			            }
+			            
+			            
 			            ventanillaAnyadir.dispose();
 			        } else {
 			            JOptionPane.showMessageDialog(ventanillaAnyadir, "Los datos introducidos tienen algún fallo. Por favor, verifique los campos resaltados en rojo.");
