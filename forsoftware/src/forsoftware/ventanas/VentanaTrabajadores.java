@@ -6,7 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedWriter;
+
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -180,7 +183,23 @@ public class VentanaTrabajadores extends JPanel{
 
 			        if (validar) {
 			            String correo = valores[1] + "." + valores[2] + "@forsoftware.es";
-			            model.addRow(new Object[]{valores[0], valores[1], valores[2], sexo, puesto, valores[3], valores[4], correo, valores[5]});
+			            Object[] DatosFila = new Object[] {valores[0], valores[1], valores[2], sexo, puesto, valores[3], valores[4], correo, valores[5]};
+			            model.addRow(DatosFila);
+			            try (BufferedWriter writer = new BufferedWriter(new FileWriter(fichero, true))) {
+			                // Formatea los datos del nuevo trabajador como una línea CSV y escríbelos en el archivo
+			                StringBuilder csvLine = new StringBuilder();
+			                for (int i = 0; i < DatosFila.length; i++) {
+			                    csvLine.append(DatosFila[i].toString());
+			                    if (i < DatosFila.length - 1) {
+			                        csvLine.append(";");
+			                    }
+			                }
+			                writer.write(csvLine.toString());
+			                writer.newLine();
+			            } catch (IOException ex) {
+			                ex.printStackTrace();
+			                JOptionPane.showMessageDialog(ventanillaAnyadir, "Error al escribir en el archivo CSV.");
+			            }
 			            ventanillaAnyadir.dispose();
 			        } else {
 			            JOptionPane.showMessageDialog(ventanillaAnyadir, "Los datos introducidos tienen algún fallo. Por favor, verifique los campos resaltados en rojo.");
