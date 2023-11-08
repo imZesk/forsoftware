@@ -46,7 +46,7 @@ public class VentanaTrabajadores extends JPanel{
              }
          };
   
-         /*
+
 		String fichero = "src/Trabajadores.csv";
 		String line = "";
 
@@ -55,9 +55,6 @@ public class VentanaTrabajadores extends JPanel{
 			while ((line = br.readLine()) != null) {
 				String[] data = line.split(";");
 				model.addRow(data);
-				//System.out.println("ID: " + data[0] + " Nombre: " + data[1] + " Apellido: " + data[2] + " Género: "
-				//		+ data[3] + " Provincia: " + data[4] + " Teléfono: " + data[5] + " Correo de empresa: "
-				//		+ data[6] + " Sueldo: " + data[8]);
 				System.out.println(data);
 				
 			}
@@ -65,7 +62,6 @@ public class VentanaTrabajadores extends JPanel{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		*/
 
 
         JTable tabla = new JTable(model);

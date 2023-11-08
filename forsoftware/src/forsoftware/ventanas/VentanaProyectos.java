@@ -22,6 +22,9 @@ import javax.swing.table.DefaultTableModel;
 
 import forsoftware.clases.Proyectos.EstadoProyecto;
 import forsoftware.clases.Proyectos.TipoDeProyecto;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 
 public class VentanaProyectos extends JPanel{
@@ -45,6 +48,9 @@ public class VentanaProyectos extends JPanel{
 				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "Pendiente"},
 
 		};
+		
+
+			
 
 		DefaultTableModel model = new DefaultTableModel(datos, columnas) {
 			private static final long serialVersionUID = 1L;
@@ -54,6 +60,25 @@ public class VentanaProyectos extends JPanel{
 				return false; // Hace que todas las celdas sean de solo lectura
 			}
 		};
+		
+		String fichero = "src/Proyectos.csv";
+		String line = "";
+
+		try (BufferedReader br = new BufferedReader(new FileReader(fichero))) {
+
+			while ((line = br.readLine()) != null) {
+				String[] data = line.split(";");
+				model.addRow(data);
+				System.out.println("hola");
+				System.out.println(data);
+
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
 		JTable tabla = new JTable(model);
 		JScrollPane scrollPane = new JScrollPane(tabla);
 		JPanel panelBotones = new JPanel();
