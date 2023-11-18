@@ -19,6 +19,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import forsoftware.clases.Proyectos.EstadoProyecto;
 import forsoftware.clases.Proyectos.TipoDeProyecto;
@@ -80,6 +82,8 @@ public class VentanaProyectos extends JPanel{
 		
 		
 		JTable tabla = new JTable(model);
+		TableRowSorter<TableModel> organizador = new TableRowSorter<TableModel>(tabla.getModel());
+		tabla.setRowSorter(organizador);
 		JScrollPane scrollPane = new JScrollPane(tabla);
 		JPanel panelBotones = new JPanel();
 
