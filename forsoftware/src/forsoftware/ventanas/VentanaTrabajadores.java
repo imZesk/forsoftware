@@ -186,14 +186,18 @@ public class VentanaTrabajadores extends JPanel{
 			            model.addRow(DatosFila);
 			            
 			            
+			            
 			            try (BufferedWriter writer = new BufferedWriter(new FileWriter(fichero, true))) {
 			                StringBuilder csvLine = new StringBuilder();
 			                for (int i = 0; i < DatosFila.length; i++) {
 			                    csvLine.append(DatosFila[i].toString());
-			                    if (i < DatosFila.length - 1) {
+			                    if (i < DatosFila.length) {
 			                        csvLine.append(";");
 			                    }
 			                }
+			                csvLine.append(valores[1].toString());
+	                        csvLine.append(";");
+			                
 			                writer.write(csvLine.toString());
 			                writer.newLine();
 			            } catch (IOException ex) {
