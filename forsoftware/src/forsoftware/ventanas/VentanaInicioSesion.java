@@ -1,4 +1,5 @@
 package forsoftware.ventanas;
+import java.util.logging.*;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -16,6 +17,9 @@ import javax.swing.JTextField;
 
 public class VentanaInicioSesion extends JFrame {
 	private static final long serialVersionUID = 1L;
+	
+    private static final Logger LOGGER = Logger.getLogger( VentanaInicioSesion.class.getName() );
+
 	private JPanel pNorte, pSur, pCentro;
 	private JTextField correo;
 	private JButton confirmar; 
@@ -69,6 +73,7 @@ public class VentanaInicioSesion extends JFrame {
 		    } else if ("ramon.perez@forsoftware.com".equals(text1) && "Ramon".equals(text2)) {
 		        JOptionPane.showMessageDialog(null, "Válido");
 		        new VentanaInicial();
+		        LOGGER.log(Level.INFO, "Sesion iniciada");
 		        dispose();
 		    } else {
 		        JOptionPane.showMessageDialog(null, "Correo o contraseña inválidos");
