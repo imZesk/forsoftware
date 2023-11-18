@@ -6,7 +6,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class VentanaInicial extends JFrame {
-    public VentanaInicial() {
+
+	private static final long serialVersionUID = 1L;
+
+	public VentanaInicial() {
         JTabbedPane tabs = new JTabbedPane();
 
         // Pestaña 1

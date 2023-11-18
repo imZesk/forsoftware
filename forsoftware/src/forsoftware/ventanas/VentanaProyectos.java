@@ -17,7 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.UIManager;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -51,8 +54,6 @@ public class VentanaProyectos extends JPanel{
 
 		};
 		
-
-			
 
 		DefaultTableModel model = new DefaultTableModel(datos, columnas) {
 			private static final long serialVersionUID = 1L;
@@ -368,8 +369,38 @@ public class VentanaProyectos extends JPanel{
 	        ventanillaAnyadir.setLocationRelativeTo(null);
 		           	            
 		});
-		
 
+		//Filtro para ventana proyecto
+		JTextField filtroTextField = new JTextField(20);
+		filtroTextField.getDocument().addDocumentListener(new DocumentListener() {
+		    @Override
+		    public void insertUpdate(DocumentEvent e) {
+		        filtrar();
+		    }
+
+		    @Override
+		    public void removeUpdate(DocumentEvent e) {
+		        filtrar();
+		    }
+
+		    @Override
+		    public void changedUpdate(DocumentEvent e) {
+		        filtrar();
+		    }
+
+		    private void filtrar() {
+		        String filtro = filtroTextField.getText();
+		        TableRowSorter<TableModel> tableSorter = (TableRowSorter<TableModel>) tabla.getRowSorter();
+		        tableSorter.setRowFilter(RowFilter.regexFilter(filtro, 0, 1, 2, 3, 4, 5, 6, 7)); //filtrar las columnas 0-7
+		    }
+		});
+
+
+		JPanel panelFiltro = new JPanel();
+		panelFiltro.add(new JLabel("Filtro: "));
+		panelFiltro.add(filtroTextField);
+		add(panelFiltro, BorderLayout.NORTH);
+		
 	}
 }
 
