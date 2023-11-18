@@ -48,14 +48,14 @@ public class VentanaInicioSesion extends JFrame {
         try (BufferedReader br = new BufferedReader(new FileReader("src/Trabajadores.csv"))) {
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(";");
-                String idTrabajador = values[0].trim();
+                String correo = values[7];
                 String nombre = values[1];
-                mapa.put(idTrabajador, nombre);
+                mapa.put(correo, nombre);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        System.out.println(mapa);
 		
 		titulo = new JLabel("Agrega correo de inicio de sesión");
 		titulo.setHorizontalAlignment(JLabel.CENTER);
