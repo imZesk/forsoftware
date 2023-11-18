@@ -84,7 +84,7 @@ public class VentanaInicioSesion extends JFrame {
 
 		    if(text1.isEmpty() || text2.isEmpty()){
 		        JOptionPane.showMessageDialog(null, "Por favor, rellene ambos campos: correo y contraseña");
-		    } else if ("ramon.perez@forsoftware.com".equals(text1) && "Ramon".equals(text2)) {
+		    } else if (mapa.containsKey(text1) && mapa.get(text1).equals(text2)) {
 		        JOptionPane.showMessageDialog(null, "Válido");
 		        new VentanaInicial();
 		        LOGGER.log(Level.INFO, "Sesion iniciada");
