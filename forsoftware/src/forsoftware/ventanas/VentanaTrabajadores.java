@@ -1,5 +1,6 @@
 package forsoftware.ventanas;
 import java.awt.BorderLayout;
+import java.util.logging.*;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -21,6 +22,8 @@ import forsoftware.clases.Trabajador.Sexo;
 public class VentanaTrabajadores extends JPanel{
 
 	private static final long serialVersionUID = 1L;
+    private static final Logger LOGGER = Logger.getLogger( VentanaTrabajadores.class.getName() );
+
 
 	public VentanaTrabajadores() {
 
@@ -84,7 +87,8 @@ public class VentanaTrabajadores extends JPanel{
                 int filaSeleccionada = tabla.getSelectedRow();
                 if(filaSeleccionada >= 0){
                     model.removeRow(filaSeleccionada);
-                    
+    		        LOGGER.log(Level.INFO, "Trabajador seleccionado eliminado");
+
                     try (FileWriter writer = new FileWriter(fichero, false)) {
                         for (int i = 0; i < model.getRowCount(); i++) {
                             for (int j = 0; j < model.getColumnCount(); j++) {
@@ -190,6 +194,7 @@ public class VentanaTrabajadores extends JPanel{
 			            String correo = valores[1] + "." + valores[2] + "@forsoftware.es";
 			            Object[] DatosFila = new Object[] {valores[0], valores[1], valores[2], sexo, puesto, valores[3], valores[4], correo, valores[5]};
 			            model.addRow(DatosFila);
+			            LOGGER.log(Level.INFO, "Trabajador creado con exito");
 			            
 			            
 			            
@@ -223,7 +228,9 @@ public class VentanaTrabajadores extends JPanel{
 	        
 	        botonCancelar.addActionListener(new ActionListener() {
 	        	public void actionPerformed(ActionEvent e) {
+			        LOGGER.log(Level.INFO, "Creacion de trabajador cancelada");
 	        		ventanillaAnyadir.dispose();
+
 	        	}
 	        });
 	         
@@ -344,18 +351,27 @@ public class VentanaTrabajadores extends JPanel{
             			            String correo = valores[1] + "." + valores[2] + "@forsoftware.es";
             			            model.removeRow(filaSeleccionada);
             			            model.addRow(new Object[]{valores[0], valores[1], valores[2], sexo, puesto, valores[3], valores[4], correo, valores[6]});
+                    		        LOGGER.log(Level.INFO, "Trabajador editado con exito");
+
             			            ventanillaEditar.dispose();
             			        } else {
             			            JOptionPane.showMessageDialog(ventanillaEditar, "Los datos introducidos tienen algún fallo. Por favor, verifique los campos resaltados en rojo.");
+                    		        LOGGER.log(Level.INFO, "Error, uno de los campos no esta bien rellenado");
+
             			        }
+            			        
+            			        
             					
             					
             				}
+            				
             			});
             	        
             	        botonCancelar.addActionListener(new ActionListener() {
             	        	public void actionPerformed(ActionEvent e) {
+            	        		LOGGER.log(Level.INFO, "Editar trabajador cancelado");
             	        		ventanillaEditar.dispose();
+            	        		
             	        	}
             	        });
             	        
@@ -370,6 +386,7 @@ public class VentanaTrabajadores extends JPanel{
             	    } else {
             	        JOptionPane.showMessageDialog(null, "Por favor, selecciona un trabajador para editar");
             	    }
+    		        
             }
         });
 
