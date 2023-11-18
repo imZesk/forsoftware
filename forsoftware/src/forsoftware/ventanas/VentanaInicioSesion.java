@@ -57,11 +57,8 @@ public class VentanaInicioSesion extends JFrame {
         }
         System.out.println(mapa);
 		
-		titulo = new JLabel("Agrega correo de inicio de sesión");
-		titulo.setHorizontalAlignment(JLabel.CENTER);
-		pNorte.add(titulo);
-		ImageIcon imagen = new ImageIcon("src/usuario.jpg");
-		ImageIcon imagenEscalada = new ImageIcon(imagen.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+		ImageIcon imagen = new ImageIcon("src/forsoftware.png");
+		ImageIcon imagenEscalada = new ImageIcon(imagen.getImage().getScaledInstance(300, 100, Image.SCALE_SMOOTH));
 	    JLabel etiquetaImagen = new JLabel(imagenEscalada);
 	    pNorte.add(etiquetaImagen, BorderLayout.CENTER);
 		correo = new JTextField(20);
