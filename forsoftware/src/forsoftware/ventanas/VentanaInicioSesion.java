@@ -1,10 +1,15 @@
 package forsoftware.ventanas;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.*;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,6 +32,7 @@ public class VentanaInicioSesion extends JFrame {
 	private JLabel etiquetaCorreo;
 	private JPasswordField contraseña;
 	private JLabel etiquietaContraseña;
+	Map<String, String> mapa = new HashMap<>();
 	
 	public VentanaInicioSesion() {
 		super();
@@ -38,7 +44,18 @@ public class VentanaInicioSesion extends JFrame {
 		getContentPane().add(pSur, BorderLayout.SOUTH);
 		getContentPane().add(pCentro,BorderLayout.CENTER);
 		
-		 
+		String line;
+        try (BufferedReader br = new BufferedReader(new FileReader("src/Trabajadores.csv"))) {
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(";");
+                String idTrabajador = values[0].trim();
+                String nombre = values[1];
+                mapa.put(idTrabajador, nombre);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 		
 		titulo = new JLabel("Agrega correo de inicio de sesión");
 		titulo.setHorizontalAlignment(JLabel.CENTER);
