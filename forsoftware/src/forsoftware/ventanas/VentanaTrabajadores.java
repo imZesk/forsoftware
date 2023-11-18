@@ -206,8 +206,6 @@ public class VentanaTrabajadores extends JPanel{
 			                        csvLine.append(";");
 			                    }
 			                }
-			                csvLine.append(valores[1].toString());
-	                        csvLine.append(";");
 			                
 			                writer.write(csvLine.toString());
 			                writer.newLine();
@@ -360,7 +358,19 @@ public class VentanaTrabajadores extends JPanel{
 
             			        }
             			        
-            			        
+            			        try (FileWriter writer = new FileWriter(fichero, false)) {
+                                    for (int i = 0; i < model.getRowCount(); i++) {
+                                        for (int j = 0; j < model.getColumnCount(); j++) {
+                                            writer.append(model.getValueAt(i, j).toString());
+                                            if (j < model.getColumnCount() - 1) {
+                                                writer.append(';');
+                                            }
+                                        }
+                                        writer.append('\n');
+                                    }
+                                } catch (IOException ex) {
+                                    System.out.println(ex.getMessage());
+                                }
             					
             					
             				}
