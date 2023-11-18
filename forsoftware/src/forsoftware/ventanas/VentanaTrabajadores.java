@@ -53,9 +53,7 @@ public class VentanaTrabajadores extends JPanel{
 
 			while ((line = br.readLine()) != null) {
 				String[] data = line.split(";");
-				model.addRow(data);
-				System.out.println(data);
-				
+				model.addRow(data);				
 			}
 
 		} catch (IOException e) {

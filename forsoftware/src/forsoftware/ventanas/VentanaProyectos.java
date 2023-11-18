@@ -71,8 +71,6 @@ public class VentanaProyectos extends JPanel{
 			while ((line = br.readLine()) != null) {
 				String[] data = line.split(";");
 				model.addRow(data);
-				System.out.println("hola");
-				System.out.println(data);
 
 			}
 
