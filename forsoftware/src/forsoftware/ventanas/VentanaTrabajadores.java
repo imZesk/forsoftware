@@ -8,8 +8,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.BufferedWriter;
-
+import java.io.FileNotFoundException;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -25,17 +26,7 @@ public class VentanaTrabajadores extends JPanel{
 
         // Crear los datos de ejemplo 
         String[] columnas = {"ID", "Nombre", "Apellido", "Género", "Puesto", "Provincia", "Telefono", "Correo de empresa", "Sueldo"};
-        String[][] datos = {
-                {"1112", "Juan", "Pérez", "hombre", "programador", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-                {"1112", "Juan", "Pérez", "hombre", "programador", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-                {"1112", "Juan", "Pérez", "hombre", "programador", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-                {"1112", "Juan", "Pérez", "hombre", "programador", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-                {"1112", "Juan", "Pérez", "hombre", "programador", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-                {"1112", "Juan", "Pérez", "hombre", "programador", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-                {"1112", "Juan", "Pérez", "hombre", "programador", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-                {"1112", "Juan", "Pérez", "hombre", "programador", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-                {"1112", "Juan", "Perez", "hombre", "programador", "Vizcaya","111111111", "Juan.Perez@forsoftware.es", "5000.00"},
-            };
+        String[][] datos = {};
 
         
         // DefaultTableModel model = new DefaultTableModel(datos, columnas);
@@ -93,6 +84,21 @@ public class VentanaTrabajadores extends JPanel{
                 int filaSeleccionada = tabla.getSelectedRow();
                 if(filaSeleccionada >= 0){
                     model.removeRow(filaSeleccionada);
+                    
+                    try (FileWriter writer = new FileWriter(fichero, false)) {
+                        for (int i = 0; i < model.getRowCount(); i++) {
+                            for (int j = 0; j < model.getColumnCount(); j++) {
+                                writer.append(model.getValueAt(i, j).toString());
+                                if (j < model.getColumnCount() - 1) {
+                                    writer.append(';');
+                                }
+                            }
+                            writer.append('\n');
+                        }
+                    } catch (IOException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    
                 }else{
                     JOptionPane.showMessageDialog(null, "Por favor, selecciona una fila primero");
                 }

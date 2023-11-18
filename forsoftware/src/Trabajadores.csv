@@ -1,11 +1,9 @@
-"1111							";Ramon;Perez;hombre;programador;Burgos;688688688;ramon.perez@forsoftware.es;3000.00;Ramon
-"1112							";Marina;Ruiz;mujer;programador;Vizcaya;688688689;marina.ruiz@forsoftware.es;3001.00;Marina
-"1113							";Luis;Vuitton;hombre;programador;Cantabria;688688690;luis.vuittonz@forsoftware.es;3002.00;Luis
-"1114							";Tony;Cruz;hombre;programador;Alicante;688688691;tony.cruz@forsoftware.es;3003.00;Tony
-"1115							";Rosalia;Flores;mujer;programador;Valencia;688688692;rosalia.flores@forsoftware.es;3004.00;Rosalia
-"1116						";Iker;Aira;hombre;programador;Galicia;688688693;iker.aira@forsoftware.es;3005.00;Iker
-"1117							";Julia;Alvarez;mujer;programador;Malaga;688688694;julia.alvarez@forsoftware.es;3006.00;Julia
-"1118							";Ibai;Gomez;hombre;programador;Asturias;688688695;ibai.gomez@forsoftware.es;3007.00;Ibai
-"1119							";Juan;Rodrigez;hombre;programador;Salamanca;688688696;juan.rodrigez@forsoftware.es;3008.00;Juan
-"1120							";Alejandro;Martinez;otros;programador;Extremadura;688688697;alejandro.martinez@forsoftware.es;3009.00;Alejandro
-1121;Persona;Apellido;hombre;escritor;Madrid;625404905;Persona.Apellido@forsoftware.es;89.34;Persona;
+"1111							";Ramon;Perez;hombre;programador;Burgos;688688688;ramon.perez@forsoftware.es;3000.00
+"1112							";Marina;Ruiz;mujer;programador;Vizcaya;688688689;marina.ruiz@forsoftware.es;3001.00
+"1113							";Luis;Vuitton;hombre;programador;Cantabria;688688690;luis.vuittonz@forsoftware.es;3002.00
+"1114							";Tony;Cruz;hombre;programador;Alicante;688688691;tony.cruz@forsoftware.es;3003.00
+"1115							";Rosalia;Flores;mujer;programador;Valencia;688688692;rosalia.flores@forsoftware.es;3004.00
+"1116						";Iker;Aira;hombre;programador;Galicia;688688693;iker.aira@forsoftware.es;3005.00
+"1117							";Julia;Alvarez;mujer;programador;Malaga;688688694;julia.alvarez@forsoftware.es;3006.00
+"1118							";Ibai;Gomez;hombre;programador;Asturias;688688695;ibai.gomez@forsoftware.es;3007.00
+"1119							";Juan;Rodrigez;hombre;programador;Salamanca;688688696;juan.rodrigez@forsoftware.es;3008.00
