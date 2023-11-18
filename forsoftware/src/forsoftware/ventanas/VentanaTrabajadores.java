@@ -15,6 +15,8 @@ import java.io.FileNotFoundException;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import forsoftware.clases.Trabajador.Puesto;
 import forsoftware.clases.Trabajador.Sexo;
@@ -62,6 +64,8 @@ public class VentanaTrabajadores extends JPanel{
 
 
         JTable tabla = new JTable(model);
+		TableRowSorter<TableModel> organizador = new TableRowSorter<TableModel>(tabla.getModel());
+		tabla.setRowSorter(organizador);
         JScrollPane scrollPane = new JScrollPane(tabla);
         JPanel panelBotones = new JPanel();
         
