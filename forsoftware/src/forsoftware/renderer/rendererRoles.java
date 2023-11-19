@@ -14,25 +14,25 @@ public class rendererRoles extends DefaultTableCellRenderer {
             ImageIcon icono;
             switch (rol) {
             case "programador":
-                icono = new ImageIcon("src/usuario.jpg");
+                icono = new ImageIcon("src/img/usuario.svg");
                 break;
             case "modelador":
-                icono = new ImageIcon("src/usuario.jpg");
+                icono = new ImageIcon("src/img/modelador.svg");
                 break;
             case "gameDesigner":
-                icono = new ImageIcon("src/usuario.jpg");
+                icono = new ImageIcon("src/img/gameDesigner.svg");
                 break;
             case "artista":
-                icono = new ImageIcon("src/usuario.jpg");
+                icono = new ImageIcon("src/img/artista.svg");
                 break;
             case "escritor":
-                icono = new ImageIcon("src/usuario.jpg");
+                icono = new ImageIcon("src/img/escritor.svg");
                 break;
             case "video":
-                icono = new ImageIcon("src/usuario.jpg");
+                icono = new ImageIcon("src/img/video.svg");
                 break;
             case "sonido":
-                icono = new ImageIcon("src/usuario.jpg");
+                icono = new ImageIcon("src/img/sonido.svg");
                 break;
             default:
                 icono = new ImageIcon("src/usuario.jpg");
