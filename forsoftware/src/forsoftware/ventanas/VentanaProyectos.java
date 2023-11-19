@@ -2,6 +2,7 @@ package forsoftware.ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +22,9 @@ import javax.swing.RowFilter;
 import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -374,7 +377,7 @@ public class VentanaProyectos extends JPanel{
 			ventanillaAnyadir.setLocationRelativeTo(null);
 
 		});
-		
+
 		//--------------------------------------------------------------------------------------------------------------------------
 		//Filtro para ventana proyecto
 		JTextField filtroTextField = new JTextField(20);
@@ -406,8 +409,32 @@ public class VentanaProyectos extends JPanel{
 		panelFiltro.add(new JLabel("Filtro: "));
 		panelFiltro.add(filtroTextField);
 		add(panelFiltro, BorderLayout.NORTH);
+		
+		//--------------------------------------------------------------------------------------------------------------------------
+		//Render para el filtro que hace que ponga en rojo y negrita las letras/numeros del table con lo que introduces en el filtro
+		TableCellRenderer cellRenderer = (table, value, isSelected, hasFocus, row, column) -> {
+			JLabel result = new JLabel(value.toString());
 
-	}
+			if (value != null) {
+				String textoCelda = value.toString();
+				String textoFiltro = filtroTextField.getText();
+
+				if (!textoFiltro.isBlank() && textoCelda.contains(textoFiltro)) {
+					String inicioStr = textoCelda.substring(0, textoCelda.indexOf(textoFiltro));
+					String finalStr = textoCelda.substring(textoCelda.indexOf(textoFiltro) + textoFiltro.length());
+
+					result.setText("<html>" + inicioStr + "<font color='red'><strong>" + textoFiltro + "</strong></font>" + finalStr + "</html>");
+					//"<HTML>" poner en formato HTML para no dar errores de caracteres
+				}   //"<STRONG style='color:red'>" poner en negrita y rojo
+			}
+			return result;
+		};
+		//aplicar el render en todas las columnas
+		for (int i = 0; i < tabla.getColumnCount(); i++) {
+			tabla.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+		}
+		
+	};
 }
 
 //cuando pones el raton encima aparece una lista de algo --> jdialog
