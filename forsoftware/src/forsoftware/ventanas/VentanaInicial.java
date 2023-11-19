@@ -7,14 +7,18 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class VentanaInicial extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	 private static String correoUsuario;
-	 private Map<String, String[]> mapa = new HashMap<>();
+	private static String correoUsuario;
+	private Map<String, String[]> mapa = new HashMap<>();
+	private JLabel lblHora;
 
 	public VentanaInicial(String correoUsuario) {
 		 super();
@@ -212,7 +216,31 @@ public class VentanaInicial extends JFrame {
        
         // Añadir tabs a la ventana
         add(tabs);
-
+        
+        
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		lblHora = new JLabel();
+		
+		/*Creamos un Thread que actualice la fecha cada  segundo*/
+		Thread t = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				//Aquí tenemos que poner el código que queremos que el Thread ejecute
+				while(true) {
+					Date fecha = new Date();
+					LocalDate fechaUpdated = LocalDate.now();
+					setTitle("Bienvenido, [] - ForSoftware - " + sdf.format(fecha) + " " + fechaUpdated.getDayOfMonth() + "/" + fechaUpdated.getMonth()+ "/" +fechaUpdated.getYear());
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		t.start();
 
         // Configurar ventana
         setTitle("Bienvenido, [] - ForSoftware");
