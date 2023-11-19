@@ -35,8 +35,14 @@ public class VentanaInicial extends JFrame {
         
         String[] datosUsuario = mapa.get(correoUsuario);
         String idUsuario = datosUsuario[0];
-                	
-        
+        String nombre = datosUsuario[1];   
+        String apellido = datosUsuario[2];
+        String sexo = datosUsuario[3];
+        String puesto = datosUsuario[4];
+        String provincia = datosUsuario[5];
+        String telefono = datosUsuario[6];
+        String correo = datosUsuario[7];
+        String sueldo = datosUsuario[8];
 
         // Pestaña 1
         JPanel panel1 = new JPanel(new BorderLayout());
@@ -109,7 +115,7 @@ public class VentanaInicial extends JFrame {
 
         // Segundo dato
         JLabel etiquetaNombre = new JLabel("Nombre: ");
-        JTextField campoNombre = new JTextField("Ivan");
+        JTextField campoNombre = new JTextField(nombre);
         campoNombre.setEditable(false);
         campoNombre.setPreferredSize(new Dimension(120, 0));
         etiquetaNombre.setPreferredSize(new Dimension(120, 0));
@@ -118,7 +124,7 @@ public class VentanaInicial extends JFrame {
 
         // Tercer dato
         JLabel etiquetaApellido = new JLabel("Apellido: ");
-        JTextField campoApellido = new JTextField("Chen");
+        JTextField campoApellido = new JTextField(apellido);
         campoApellido.setEditable(false);
         campoApellido.setPreferredSize(new Dimension(120, 0));
         etiquetaApellido.setPreferredSize(new Dimension(120, 0));
@@ -127,7 +133,7 @@ public class VentanaInicial extends JFrame {
 
         // Cuarto dato
         JLabel etiquetaSexo = new JLabel("Sexo: ");
-        JTextField campoSexo = new JTextField("Masculino");
+        JTextField campoSexo = new JTextField(sexo);
         campoSexo.setEditable(false);
         campoSexo.setPreferredSize(new Dimension(120, 0));
         etiquetaSexo.setPreferredSize(new Dimension(120, 0));
@@ -136,7 +142,7 @@ public class VentanaInicial extends JFrame {
         
         // Cuarto dato
         JLabel etiquetaPuesto = new JLabel("Puesto: ");
-        JTextField campoPuesto = new JTextField("Programador");
+        JTextField campoPuesto = new JTextField(puesto);
         campoPuesto.setEditable(false);
         campoPuesto.setPreferredSize(new Dimension(120, 0));
         etiquetaSexo.setPreferredSize(new Dimension(120, 0));
@@ -145,7 +151,7 @@ public class VentanaInicial extends JFrame {
 
         // Quinto dato
         JLabel etiquetaProvincia = new JLabel("Provincia: ");
-        JTextField campoProvincia = new JTextField("Cantabria");
+        JTextField campoProvincia = new JTextField(provincia);
         campoProvincia.setEditable(false);
         campoProvincia.setPreferredSize(new Dimension(120, 0));
         etiquetaProvincia.setPreferredSize(new Dimension(120, 0));
@@ -154,7 +160,7 @@ public class VentanaInicial extends JFrame {
 
         // Sexto dato
         JLabel etiquetaTelefono = new JLabel("Telefono: ");
-        JTextField campoTelefono = new JTextField("666777888");
+        JTextField campoTelefono = new JTextField(telefono);
         campoTelefono.setEditable(false);
         campoTelefono.setPreferredSize(new Dimension(120, 0));
         etiquetaTelefono.setPreferredSize(new Dimension(120, 0));
@@ -165,7 +171,7 @@ public class VentanaInicial extends JFrame {
         
         // Septimo dato
         JLabel etiquetaCorreoEmp = new JLabel("Dirección correo: ");
-        JTextField campoCorreoEmp = new JTextField("test@forsoftware.es");
+        JTextField campoCorreoEmp = new JTextField(correo);
         campoCorreoEmp.setEditable(false);
         campoCorreoEmp.setPreferredSize(new Dimension(120, 0));
         etiquetaCorreoEmp.setPreferredSize(new Dimension(120, 0));
@@ -176,7 +182,7 @@ public class VentanaInicial extends JFrame {
         
         // Octavo dato
         JLabel etiquetaSueldo = new JLabel("Sueldo: ");
-        JTextField campoSueldo = new JTextField("10000");
+        JTextField campoSueldo = new JTextField(sueldo);
         campoSueldo.setEditable(false);
         campoSueldo.setPreferredSize(new Dimension(120, 0));
         etiquetaSueldo.setPreferredSize(new Dimension(120, 0));
