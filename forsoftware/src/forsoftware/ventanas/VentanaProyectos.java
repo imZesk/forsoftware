@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
@@ -67,21 +68,6 @@ public class VentanaProyectos extends JPanel{
 			}
 		};
 
-		String fichero = "src/Proyectos.csv";
-		String line = "";
-
-		try (BufferedReader br = new BufferedReader(new FileReader(fichero))) {
-
-			while ((line = br.readLine()) != null) {
-				String[] data = line.split(";");
-				model.addRow(data);
-
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 
 		JTable tabla = new JTable(model);
 		TableRowSorter<TableModel> organizador = new TableRowSorter<TableModel>(tabla.getModel());
@@ -96,14 +82,29 @@ public class VentanaProyectos extends JPanel{
 		panelBotones.add(botonAnyadir);
 		panelBotones.add(botonEliminar);
 		panelBotones.add(botonEditar);
-
-
+		
 		setLayout(new BorderLayout());
 		add(scrollPane, BorderLayout.CENTER);
 		add(panelBotones, BorderLayout.SOUTH);
 
 
 		tabla.setRowSorter(organizador);
+		
+		
+		String fichero = "src/Proyectos.csv";
+		String line = "";
+
+		try (BufferedReader br = new BufferedReader(new FileReader(fichero))) {
+
+			while ((line = br.readLine()) != null) {
+				String[] data = line.split(";");
+				model.addRow(data);
+
+			}
+			tabla.repaint();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		//----------------------------------------------------------------------------------------------------
 		//Funcion del botonELiminar---------------------------------------------------------------------------
 		botonEliminar.addActionListener(e ->{ 
@@ -427,12 +428,17 @@ public class VentanaProyectos extends JPanel{
 					//"<HTML>" poner en formato HTML para no dar errores de caracteres
 				}   //"<STRONG style='color:red'>" poner en negrita y rojo
 			}
+			
+			 if (isSelected) {
+		            result.setBackground(Color.YELLOW); 
+		        } else {
+		            result.setBackground(table.getBackground());
+		        }
+			setOpaque(true);
 			return result;
 		};
-		//aplicar el render en todas las columnas
-		for (int i = 0; i < tabla.getColumnCount(); i++) {
-			tabla.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
-		}
+		//aplicar el render en todas la tabla
+		tabla.setDefaultRenderer(Object.class, cellRenderer);
 		
 	};
 }
