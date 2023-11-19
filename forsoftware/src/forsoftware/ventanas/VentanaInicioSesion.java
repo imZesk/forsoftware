@@ -87,7 +87,7 @@ public class VentanaInicioSesion extends JFrame {
 		    } else if (mapa.containsKey(text1) && mapa.get(text1).equals(text2)) {
 		        JOptionPane.showMessageDialog(null, "Válido");
 		        new VentanaInicial(text1);
-		        LOGGER.log(Level.INFO, "Sesion iniciada");
+		        LOGGER.log(Level.INFO, "Sesion iniciada como: " + text1);
 		        dispose();
 		    } else {
 		        JOptionPane.showMessageDialog(null, "Correo o contraseña inválidos");
