@@ -82,15 +82,15 @@ public class VentanaProyectos extends JPanel{
 		panelBotones.add(botonAnyadir);
 		panelBotones.add(botonEliminar);
 		panelBotones.add(botonEditar);
-		
+
 		setLayout(new BorderLayout());
 		add(scrollPane, BorderLayout.CENTER);
 		add(panelBotones, BorderLayout.SOUTH);
 
 
 		tabla.setRowSorter(organizador);
-		
-		
+
+
 		String fichero = "src/Proyectos.csv";
 		String line = "";
 
@@ -410,42 +410,46 @@ public class VentanaProyectos extends JPanel{
 		panelFiltro.add(new JLabel("Filtro: "));
 		panelFiltro.add(filtroTextField);
 		add(panelFiltro, BorderLayout.NORTH);
-		
+
 		//--------------------------------------------------------------------------------------------------------------------------
 		//Render para el filtro que hace que ponga en rojo y negrita las letras/numeros del table con lo que introduces en el filtro
-
+		//poner las filas seleccionadas en gris claro
 		TableCellRenderer cellRenderer = (table, value, isSelected, hasFocus, row, column) -> {
-		    JLabel result = new JLabel(value.toString());
+			JLabel result = new JLabel(value.toString());
 			int selectedRow = -1; // Variable para rastrear la fila seleccionada
 
-		    if (value != null) {
-		        String textoCelda = value.toString();
-		        String textoFiltro = filtroTextField.getText();
+			if (value != null) {
+				String textoCelda = value.toString();
+				String textoFiltro = filtroTextField.getText();
 
-		        if (!textoFiltro.isBlank() && textoCelda.contains(textoFiltro)) {
-		            String inicioStr = textoCelda.substring(0, textoCelda.indexOf(textoFiltro));
-		            String finalStr = textoCelda.substring(textoCelda.indexOf(textoFiltro) + textoFiltro.length());
+				if (!textoFiltro.isBlank() && textoCelda.contains(textoFiltro)) {
+					String inicioStr = textoCelda.substring(0, textoCelda.indexOf(textoFiltro));
+					String finalStr = textoCelda.substring(textoCelda.indexOf(textoFiltro) + textoFiltro.length());
 
-		            result.setText("<html>" + inicioStr + "<font color='red'><strong>" + textoFiltro + "</strong></font>" + finalStr + "</html>");
-		        }
-		    }
+					result.setText("<html>" + inicioStr + "<font color='red'><strong>" + textoFiltro + "</strong></font>" + finalStr + "</html>");
+				}   //"<HTML>" poner en formato HTML para no dar errores de caracteres
+			}		//"<STRONG style='color:red'>" poner en negrita y rojo
 
-		    if (isSelected) {
-		        if (selectedRow != -1 && selectedRow != row) {
-		            // Restablecer el color de fondo de la fila anteriormente seleccionada
-		            table.setRowSelectionInterval(selectedRow, selectedRow);
-		        }
-		        result.setBackground(Color.gray.brighter());
-		        selectedRow = row; // Actualizar la fila seleccionada
-		    } else {
-		        result.setBackground(table.getBackground());
-		    }
-		    result.setOpaque(true);
-		    return result;
+			if (isSelected) {
+				if (selectedRow != -1 && selectedRow != row) {
+					// Restablecer el color de fondo de la fila anteriormente seleccionada
+					table.setRowSelectionInterval(selectedRow, selectedRow);
+				}
+				result.setBackground(Color.gray.brighter());
+				selectedRow = row; // Actualizar la fila seleccionada
+			} else {
+				result.setBackground(table.getBackground());
+			}
+			result.setOpaque(true);
+			return result;
 		};
 
 		// Aplicar el render en todas la tabla
-		tabla.setDefaultRenderer(Object.class, cellRenderer);}}
+		tabla.setCellSelectionEnabled(true);
+		tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
+		tabla.setDefaultRenderer(Object.class, cellRenderer);
+	}
+}
 
 
 //cuando pones el raton encima aparece una lista de algo --> jdialog

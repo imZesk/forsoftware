@@ -12,7 +12,7 @@ public class rendererRoles extends DefaultTableCellRenderer {
             JLabel label = new JLabel();
             label.setHorizontalAlignment(JLabel.CENTER); // centra la imagen en la celda
             ImageIcon icono;
-            switch (rol) {
+            switch (rol) {  // mira cada caso y pone la foto dependiendo del rol
             case "programador":
                 icono = new ImageIcon("img/programador.png");
                 break;
