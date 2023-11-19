@@ -102,7 +102,7 @@ public class VentanaProyectos extends JPanel{
 
 		tabla.setRowSorter(organizador);
 		//----------------------------------------------------------------------------------------------------
-		//Funcion del botonELiminar-----------------------------------------------------------------------------
+		//Funcion del botonELiminar---------------------------------------------------------------------------
 		botonEliminar.addActionListener(e ->{ 
 			int filaSeleccionada = tabla.getSelectedRow();
 			if(filaSeleccionada >= 0){
@@ -126,8 +126,7 @@ public class VentanaProyectos extends JPanel{
 					ventanillaEditar.setTitle("Editar Datos del Proyecto");
 					ventanillaEditar.setLayout(new BorderLayout());
 
-					// Tus campos de entrada aquí
-					// ...
+					// campos de entrada 
 					JPanel panelDeDatos = new JPanel(new GridLayout(8, 2));
 					JTextField[] jTextIntroducido = new JTextField[6];
 					Color[] colorDefecto = new Color[6]; //para poner el fondo de nuevo en blanco
@@ -142,7 +141,7 @@ public class VentanaProyectos extends JPanel{
 						panelDeDatos.add(jTextIntroducido[pos]);
 					}
 
-					// Rellenar los campos de entrada con los datos del proyecto seleccionado
+					// Rellena los campos de entrada con los datos del proyecto seleccionado
 					for (int pos = 0; pos < nomDatos.length; pos++) {
 
 						jTextIntroducido[0].setText((String) tabla.getValueAt(filaSeleccionada, 0));
@@ -261,7 +260,7 @@ public class VentanaProyectos extends JPanel{
 
 
 		//----------------------------------------------------------------------------------------------------
-		//Funcion del botonAnyadir----------------------------------------------------------------------------
+		//Funcion del botonAñadir----------------------------------------------------------------------------
 		botonAnyadir.addActionListener(e ->{
 			organizador.setRowFilter(null); // Resetear el filtro antes de agregar una nueva fila
 			JDialog ventanillaAnyadir = new JDialog();
@@ -375,6 +374,7 @@ public class VentanaProyectos extends JPanel{
 			ventanillaAnyadir.setLocationRelativeTo(null);
 
 		});
+		
 		//--------------------------------------------------------------------------------------------------------------------------
 		//Filtro para ventana proyecto
 		JTextField filtroTextField = new JTextField(20);

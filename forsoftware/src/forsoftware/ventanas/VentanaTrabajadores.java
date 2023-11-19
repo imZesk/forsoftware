@@ -86,10 +86,12 @@ public class VentanaTrabajadores extends JPanel{
         panelBotones.add(botonAnyadir);
         panelBotones.add(botonEliminar);
 
-        
+        //----------------------------------------------------------------------------------------------------
+      	//Funcion del botonELiminar---------------------------------------------------------------------------
         botonEliminar.addActionListener(e ->{ 
                 int filaSeleccionada = tabla.getSelectedRow();
                 if(filaSeleccionada >= 0){
+                	organizador.setRowFilter(null);     // resetear el filtro antes de eliminar la fila para no dar error
                     model.removeRow(filaSeleccionada);
     		        LOGGER.log(Level.INFO, "Trabajador seleccionado eliminado");
 
@@ -113,8 +115,10 @@ public class VentanaTrabajadores extends JPanel{
             
         });
         
+        //----------------------------------------------------------------------------------------------------
+      	//Funcion del botonAñadir-----------------------------------------------------------------------------
         botonAnyadir.addActionListener(e ->{
-        	
+        	organizador.setRowFilter(null); // Resetear el filtro antes de agregar una nueva fila
         	JDialog ventanillaAnyadir = new JDialog();
 	        ventanillaAnyadir.setTitle("Ingresar Datos del Trabajador");
 	        ventanillaAnyadir.setLayout(new BorderLayout());
@@ -251,17 +255,20 @@ public class VentanaTrabajadores extends JPanel{
         JButton botonEditar = new JButton("Editar trabajador"); 
         panelBotones.add(botonEditar); 
 
+        
+        //----------------------------------------------------------------------------------------------------
+      	//Funcion del botonEditar-----------------------------------------------------------------------------
         botonEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	 int filaSeleccionada = tabla.getSelectedRow();
             	    if (filaSeleccionada != -1) {
+            	    	organizador.setRowFilter(null);  // resetear el filtro antes de editar
             	    	JDialog ventanillaEditar = new JDialog();
             	        ventanillaEditar.setTitle("Editar Datos del Trabajador");
             	        ventanillaEditar.setLayout(new BorderLayout());
 
-            	        // Tus campos de entrada aquí
-            	        // ...
+            	        // campos de entrada 
             	        JPanel panelDeDatos = new JPanel(new GridLayout(9, 2));
             	        JTextField[] jTextIntroducido = new JTextField[7];
             	        Color[] colorDefecto = new Color[7]; //para poner el fondo de nuevo en blanco
@@ -276,7 +283,7 @@ public class VentanaTrabajadores extends JPanel{
             	            panelDeDatos.add(jTextIntroducido[pos]);
             	        }
 
-            	        // Rellenar los campos de entrada con los datos del trabajador seleccionado
+            	        // Rellena los campos de entrada con los datos del trabajador seleccionado
             	        for (int pos = 0; pos < nomDatos.length; pos++) {
             	        	
             	            jTextIntroducido[0].setText((String) tabla.getValueAt(filaSeleccionada, 0));
@@ -403,7 +410,8 @@ public class VentanaTrabajadores extends JPanel{
     		        
             }
         });
-
+        
+        //------------------------------------------------------------------------------------------------------------------------
         //Filtro para ventana trabajador
         JTextField filtroTextField = new JTextField(20);
         filtroTextField.getDocument().addDocumentListener(new DocumentListener() {
