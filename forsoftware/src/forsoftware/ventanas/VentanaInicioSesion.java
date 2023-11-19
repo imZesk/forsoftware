@@ -93,6 +93,7 @@ public class VentanaInicioSesion extends JFrame {
 		        JOptionPane.showMessageDialog(null, "Correo o contraseña inválidos");
 		    }
 		});
+		
 
 		
 		setVisible(true);
