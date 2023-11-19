@@ -434,7 +434,7 @@ public class VentanaProyectos extends JPanel{
 		        } else {
 		            result.setBackground(table.getBackground());
 		        }
-			setOpaque(true);
+			setOpaque(true); 
 			return result;
 		};
 		//aplicar el render en todas la tabla
