@@ -67,7 +67,7 @@ public class VentanaTrabajadores extends JPanel{
 
 		JTable tabla = new JTable(model);
 		TableRowSorter<TableModel> organizador = new TableRowSorter<TableModel>(tabla.getModel());
-		tabla.getColumnModel().getColumn(4).setCellRenderer(new rendererRoles());
+		// tabla.getColumnModel().getColumn(4).setCellRenderer(new rendererRoles());
 		tabla.setRowSorter(organizador);
 		JScrollPane scrollPane = new JScrollPane(tabla);
 		JPanel panelBotones = new JPanel();
@@ -468,6 +468,7 @@ public class VentanaTrabajadores extends JPanel{
 		//aplicar el render en todas las columnas
 		for (int i = 0; i < tabla.getColumnCount(); i++) {
 			tabla.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+			tabla.getColumnModel().getColumn(4).setCellRenderer(new rendererRoles());
 		}
 	};
 }

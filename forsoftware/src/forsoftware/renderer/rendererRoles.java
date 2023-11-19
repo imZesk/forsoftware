@@ -14,32 +14,32 @@ public class rendererRoles extends DefaultTableCellRenderer {
             ImageIcon icono;
             switch (rol) {
             case "programador":
-                icono = new ImageIcon("src/img/usuario.svg");
+                icono = new ImageIcon("img/programador.png");
                 break;
             case "modelador":
-                icono = new ImageIcon("src/img/modelador.svg");
+                icono = new ImageIcon("img/modelador.png");
                 break;
             case "gameDesigner":
-                icono = new ImageIcon("src/img/gameDesigner.svg");
+                icono = new ImageIcon("img/gameDesigner.png");
                 break;
             case "artista":
-                icono = new ImageIcon("src/img/artista.svg");
+                icono = new ImageIcon("img/artista.png");
                 break;
             case "escritor":
-                icono = new ImageIcon("src/img/escritor.svg");
+                icono = new ImageIcon("img/escritor.png");
                 break;
             case "video":
-                icono = new ImageIcon("src/img/video.svg");
+                icono = new ImageIcon("img/video.png");
                 break;
             case "sonido":
-                icono = new ImageIcon("src/img/sonido.svg");
+                icono = new ImageIcon("img/sonido.png");
                 break;
             default:
-                icono = new ImageIcon("src/usuario.jpg");
+                icono = new ImageIcon("usuario.jpg");
                 break;
         }
             Image img = icono.getImage();
-            Image newimg = img.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH); // ajustar tamaño
+            Image newimg = img.getScaledInstance(15, 15, java.awt.Image.SCALE_SMOOTH); // ajustar tamaño
             icono = new ImageIcon(newimg);
             label.setIcon(icono);
             return label;
