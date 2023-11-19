@@ -196,7 +196,7 @@ public class VentanaInicial extends JFrame {
         panel1.add(panelDatos, BorderLayout.CENTER);          
 
         // Añadir pestaña 1 a las tabs
-        tabs.addTab("Pestaña 1", panel1);
+        tabs.addTab("Inicio", panel1);
         
 // ========================================= FIN PESTAÑA 1 =========================================
       

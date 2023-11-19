@@ -483,6 +483,7 @@ public class VentanaTrabajadores extends JPanel{
 		tabla.setCellSelectionEnabled(true);
 		tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
 		tabla.setDefaultRenderer(Object.class, cellRenderer);
+		tabla.getColumnModel().getColumn(4).setCellRenderer(new rendererRoles());
 	};
 }
 
