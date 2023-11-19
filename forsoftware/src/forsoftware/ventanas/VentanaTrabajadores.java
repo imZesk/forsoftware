@@ -23,6 +23,7 @@ import javax.swing.table.TableRowSorter;
 
 import forsoftware.clases.Trabajador.Puesto;
 import forsoftware.clases.Trabajador.Sexo;
+import forsoftware.renderer.rendererRoles;
 
 public class VentanaTrabajadores extends JPanel{
 
@@ -66,6 +67,7 @@ public class VentanaTrabajadores extends JPanel{
 
 		JTable tabla = new JTable(model);
 		TableRowSorter<TableModel> organizador = new TableRowSorter<TableModel>(tabla.getModel());
+		tabla.getColumnModel().getColumn(4).setCellRenderer(new rendererRoles());
 		tabla.setRowSorter(organizador);
 		JScrollPane scrollPane = new JScrollPane(tabla);
 		JPanel panelBotones = new JPanel();
