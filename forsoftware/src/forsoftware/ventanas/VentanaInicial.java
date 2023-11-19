@@ -4,13 +4,39 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class VentanaInicial extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	 private static String correoUsuario;
+	 private Map<String, String[]> mapa = new HashMap<>();
 
-	public VentanaInicial() {
+	public VentanaInicial(String correoUsuario) {
+		 super();
         JTabbedPane tabs = new JTabbedPane();
+        this.correoUsuario = correoUsuario;
+        
+        
+        String line;
+        try (BufferedReader br = new BufferedReader(new FileReader("src/Trabajadores.csv"))) {
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(";"); // Asegúrate de que estás dividiendo por el carácter correcto
+                String correo = values[7];
+                mapa.put(correo, values);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        String[] datosUsuario = mapa.get(correoUsuario);
+        String idUsuario = datosUsuario[0];
+                	
+        
 
         // Pestaña 1
         JPanel panel1 = new JPanel(new BorderLayout());
@@ -74,7 +100,7 @@ public class VentanaInicial extends JFrame {
 
         // Primer dato
         JLabel etiquetaId = new JLabel("ID: ");
-        JTextField campoId = new JTextField("000");
+        JTextField campoId = new JTextField(idUsuario);
         campoId.setEditable(false);
         campoId.setPreferredSize(new Dimension(120, 10));
         etiquetaId.setPreferredSize(new Dimension(120, 10));
@@ -192,7 +218,7 @@ public class VentanaInicial extends JFrame {
 
     public static void main(String[] args) {
     	SwingUtilities.invokeLater(() -> {         //asegurar de que el codigo este y asegurar que la interfaz de usuario se actualice de manera adecuada
-            VentanaInicial ventana = new VentanaInicial();
+            VentanaInicial ventana = new VentanaInicial(correoUsuario);
             ventana.setVisible(true);
         });
 
