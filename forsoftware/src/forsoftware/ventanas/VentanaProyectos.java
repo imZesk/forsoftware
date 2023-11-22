@@ -2,16 +2,23 @@ package forsoftware.ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,10 +27,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
-import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
@@ -448,9 +453,69 @@ public class VentanaProyectos extends JPanel{
 		tabla.setCellSelectionEnabled(true);
 		tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
 		tabla.setDefaultRenderer(Object.class, cellRenderer);
+
+
+		//--------------------------------------------------------------------------------------------------------------------------
+		//Ventanilla para mostrar los datos de los trabajadores que hay en ese proyecto
+
+		tabla.addMouseListener(new MouseAdapter() {
+			private Timer t;
+			private final int DELAY = 1000; // esperar un tiempo antes de mostrar la ventanilla
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				t = new Timer();
+				t.schedule(new TimerTask() {
+					@Override
+					public void run() {
+						int row = tabla.rowAtPoint(e.getPoint());
+						if (row >= 0) {
+							Map<String, String> data = new HashMap<>();
+							for (int col = 0; col < model.getColumnCount(); col++) {
+								String columnName = model.getColumnName(col);
+								String cellValue = Objects.toString(model.getValueAt(row, col), "");
+								data.put(columnName, cellValue);
+							}
+
+							mostrarDetalleProyecto(data, e.getLocationOnScreen());
+						}
+					}
+				}, DELAY);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				t.cancel();
+				cerrarDetalleProyecto(); // Cierra el detalle del proyecto al salir del área de la fila
+			}
+			private void cerrarDetalleProyecto() {
+				if (detalleDialog != null && detalleDialog.isVisible()) {
+					detalleDialog.dispose();
+					detalleDialog = null;
+				}
+			}
+
+			private void mostrarDetalleProyecto(Map<String, String> data, Point location) {
+				cerrarDetalleProyecto(); // Cierra el detalle del proyecto antes de abrir uno nuevo
+
+				detalleDialog = new JDialog();
+				detalleDialog.setTitle("Detalle del Proyecto");
+				detalleDialog.setLayout(new BorderLayout());
+
+				JPanel panelDeDatos = new JPanel(new GridLayout(0, 1));
+
+				for (Map.Entry<String, String> entry : data.entrySet()) {
+					JLabel label = new JLabel(entry.getKey() + ": " + entry.getValue());
+					panelDeDatos.add(label);
+				}
+
+				detalleDialog.add(panelDeDatos, BorderLayout.CENTER);
+
+				detalleDialog.setSize(new Dimension(300, 150));
+				detalleDialog.setLocation(location);
+				detalleDialog.setVisible(true);
+			}
+			private JDialog detalleDialog;
+		});
 	}
 }
-
-
-//cuando pones el raton encima aparece una lista de algo --> jdialog
-//loggers
