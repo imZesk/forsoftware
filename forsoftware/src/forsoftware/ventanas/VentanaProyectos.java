@@ -2,6 +2,7 @@ package forsoftware.ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Point;
@@ -27,8 +28,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
@@ -458,64 +461,33 @@ public class VentanaProyectos extends JPanel{
 		//--------------------------------------------------------------------------------------------------------------------------
 		//Ventanilla para mostrar los datos de los trabajadores que hay en ese proyecto
 
-		tabla.addMouseListener(new MouseAdapter() {
-			private Timer t;
-			private final int DELAY = 1000; // esperar un tiempo antes de mostrar la ventanilla
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				t = new Timer();
-				t.schedule(new TimerTask() {
-					@Override
-					public void run() {
-						int row = tabla.rowAtPoint(e.getPoint());
-						if (row >= 0) {
-							Map<String, String> data = new HashMap<>();
-							for (int col = 0; col < model.getColumnCount(); col++) {
-								String columnName = model.getColumnName(col);
-								String cellValue = Objects.toString(model.getValueAt(row, col), "");
-								data.put(columnName, cellValue);
-							}
-
-							mostrarDetalleProyecto(data, e.getLocationOnScreen());
-						}
-					}
-				}, DELAY);
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				t.cancel();
-				cerrarDetalleProyecto(); // Cierra el detalle del proyecto al salir del área de la fila
-			}
-			private void cerrarDetalleProyecto() {
-				if (detalleDialog != null && detalleDialog.isVisible()) {
-					detalleDialog.dispose();
-					detalleDialog = null;
-				}
-			}
-
-			private void mostrarDetalleProyecto(Map<String, String> data, Point location) {
-				cerrarDetalleProyecto(); // Cierra el detalle del proyecto antes de abrir uno nuevo
-
-				detalleDialog = new JDialog();
-				detalleDialog.setTitle("Detalle del Proyecto");
-				detalleDialog.setLayout(new BorderLayout());
-
-				JPanel panelDeDatos = new JPanel(new GridLayout(0, 1));
-
-				for (Map.Entry<String, String> entry : data.entrySet()) {
-					JLabel label = new JLabel(entry.getKey() + ": " + entry.getValue());
-					panelDeDatos.add(label);
-				}
-
-				detalleDialog.add(panelDeDatos, BorderLayout.CENTER);
-
-				detalleDialog.setSize(new Dimension(300, 150));
-				detalleDialog.setLocation(location);
-				detalleDialog.setVisible(true);
-			}
-			private JDialog detalleDialog;
-		});
+		for (int i = 0; i < tabla.getColumnCount(); i++) {
+            tabla.getColumnModel().getColumn(i).setCellRenderer(new TooltipRenderer());
+        }
+        
+        
 	}
+	 private class TooltipRenderer extends DefaultTableCellRenderer {
+	        @Override
+	        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+	            // Obtener el valor de la celda
+	            String valorCelda = (String) value;
+
+	            // Crear el tooltip con la información de la fila completa
+	            String tooltipText = String.format("<html>ID: %s<br>Nombre: %s<br>NumParticipantes: %s<br>Fecha Inicio: %s<br>Fecha Acabado: %s</html>", row + 1,
+	                    table.getValueAt(row, 0), table.getValueAt(row, 1),
+	                    table.getValueAt(row, 2), table.getValueAt(row, 3),
+	                    table.getValueAt(row, 4));
+
+	            // Establecer el tooltip en la celda
+	            setToolTipText(tooltipText);
+
+	            // Devolver el componente renderizado
+	            return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+	        }
+	    }
+
+	    public static void main(String[] args) {
+	        SwingUtilities.invokeLater(() -> new VentanaProyectos());
+	    }
 }
