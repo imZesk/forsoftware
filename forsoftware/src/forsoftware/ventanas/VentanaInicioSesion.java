@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -52,9 +53,13 @@ public class VentanaInicioSesion extends JFrame {
                 String nombre = values[1];
                 mapa.put(correo, nombre);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        }catch (FileNotFoundException e) {
+		    System.out.println("El archivo no se ha encontrado: " + e.getMessage());
+		}catch (IOException e) {
+			e.printStackTrace();
+		}catch (IllegalArgumentException e) {
+		    System.out.println("Error en los datos: " + e.getMessage());
+		}
         System.out.println(mapa);
 		
 		ImageIcon imagen = new ImageIcon("src/forsoftware.png");
