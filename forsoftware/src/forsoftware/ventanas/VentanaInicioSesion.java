@@ -1,6 +1,7 @@
 package forsoftware.ventanas;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.logging.*;
 
 import java.awt.BorderLayout;
@@ -8,9 +9,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,6 +37,7 @@ public class VentanaInicioSesion extends JFrame {
 	private JPasswordField contraseña;
 	private JLabel etiquietaContraseña;
 	Map<String, String> mapa = new HashMap<>();
+	Map<String, String> properties = new HashMap<>();
 	
 	public VentanaInicioSesion() {
 		super();
@@ -45,6 +49,34 @@ public class VentanaInicioSesion extends JFrame {
 		getContentPane().add(pSur, BorderLayout.SOUTH);
 		getContentPane().add(pCentro,BorderLayout.CENTER);
 		
+	    Properties prop = new Properties();
+	    InputStream input = null;
+
+	    try {
+	        input = new FileInputStream("src/forsoftware/properties/config.properties");
+	        prop.load(input);
+
+	        for (String key : prop.stringPropertyNames()) {
+	            String value = prop.getProperty(key);
+	            properties.put(key, value);
+	        }
+	        System.out.println(properties);
+
+	    }catch (FileNotFoundException ex) {
+	        System.out.println("El archivo de propiedades no se ha encontrado: " + ex.getMessage());
+	    } catch (IOException ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        if (input != null) {
+	            try {
+	                input.close();
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+		
+	    
 		String line;
         try (BufferedReader br = new BufferedReader(new FileReader("src/Trabajadores.csv"))) {
             while ((line = br.readLine()) != null) {
