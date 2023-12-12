@@ -40,6 +40,7 @@ import javax.swing.table.TableRowSorter;
 import forsoftware.clases.Proyectos.EstadoProyecto;
 import forsoftware.clases.Proyectos.TipoDeProyecto;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -106,12 +107,21 @@ public class VentanaProyectos extends JPanel{
 
 			while ((line = br.readLine()) != null) {
 				String[] data = line.split(";");
+				
+				if (data.length != 8) {
+		            throw new IllegalArgumentException("La línea no tiene el número correcto de campos");
+		        }
+				
 				model.addRow(data);
 
 			}
 			tabla.repaint();
-		} catch (IOException e) {
+		} catch (FileNotFoundException e) {
+		    System.out.println("El archivo no se ha encontrado: " + e.getMessage());
+		}catch (IOException e) {
 			e.printStackTrace();
+		}catch (IllegalArgumentException e) {
+		    System.out.println("Error en los datos: " + e.getMessage());
 		}
 		//----------------------------------------------------------------------------------------------------
 		//Funcion del botonELiminar---------------------------------------------------------------------------
