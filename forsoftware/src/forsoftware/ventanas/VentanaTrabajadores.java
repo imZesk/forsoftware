@@ -57,11 +57,20 @@ public class VentanaTrabajadores extends JPanel{
 
 			while ((line = br.readLine()) != null) {
 				String[] data = line.split(";");
+				
+				 if (data.length != 9) {
+			            throw new IllegalArgumentException("La línea no tiene el número correcto de campos");
+			        }
+				
 				model.addRow(data);				
 			}
 
-		} catch (IOException e) {
+		}catch (FileNotFoundException e) {
+		    System.out.println("El archivo no se ha encontrado: " + e.getMessage());
+		}catch (IOException e) {
 			e.printStackTrace();
+		}catch (IllegalArgumentException e) {
+		    System.out.println("Error en los datos: " + e.getMessage());
 		}
 
 
@@ -110,7 +119,9 @@ public class VentanaTrabajadores extends JPanel{
 					}
 				} catch (IOException ex) {
 					System.out.println(ex.getMessage());
-				}
+				}catch (IllegalArgumentException ex) {
+		            System.out.println("Error en los datos de la tabla: " + ex.getMessage());
+		        }
 
 			}else{
 				JOptionPane.showMessageDialog(null, "Por favor, selecciona una fila primero");
@@ -223,6 +234,8 @@ public class VentanaTrabajadores extends JPanel{
 						} catch (IOException ex) {
 							ex.printStackTrace();
 							JOptionPane.showMessageDialog(ventanillaAnyadir, "Error al escribir en el archivo CSV.");
+						}catch (IllegalArgumentException ex) {
+						    System.out.println("Error en los datos de la tabla: " + ex.getMessage());
 						}
 
 
@@ -384,6 +397,8 @@ public class VentanaTrabajadores extends JPanel{
 								}
 							} catch (IOException ex) {
 								System.out.println(ex.getMessage());
+							}catch (IllegalArgumentException ex) {
+							    System.out.println("Error en los datos de la tabla: " + ex.getMessage());
 							}
 
 
