@@ -9,10 +9,15 @@ public class Trabajador {
 	public enum Sexo {
 		hombre,mujer,otros;
 	}
-	public enum Puesto{
+	public enum Puesto {
 		programador, modelador, gameDesigner, artista, escritor, video, sonido;
 	}
-	private String provincia;
+	private enum Provincia {
+		Álava, Albacete, Alicante, Almería, Asturias, Ávila, Badajoz, Barcelona, Burgos, Cáceres, Cádiz, Cantabria, Castellón, Ciudad_Real, 
+		Córdoba, Cuenca, Gerona, Granada, Guadalajara, Guipúzcoa, Huelva, Huesca, Islas_Baleares, Jaén, La_Coruña, La_Rioja, Las_Palmas, 
+		León, Lérida, Lugo, Madrid, Málaga, Murcia, Navarra, Orense, Palencia, Pontevedra, Salamanca, Tenerife, 
+		Segovia, Sevilla, Soria, Tarragona, Teruel, Toledo, Valencia, Valladolid, Vizcaya, Zamora, Zaragoza;
+	};
 	private int telefono;
 	private String correoEmpresa;
 	private double sueldo;
@@ -21,7 +26,6 @@ public class Trabajador {
 		this.ID = ID;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.provincia = provincia;
 		this.telefono = telefono;
 		this.correoEmpresa = correoEmpresa;
 		this.sueldo = sueldo;
@@ -51,14 +55,6 @@ public class Trabajador {
 		this.apellido = apellido;
 	}
 
-	public String getProvincia() {
-		return provincia;
-	}
-
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
-	}
-
 	public int getTelefono() {
 		return telefono;
 	}
@@ -85,13 +81,13 @@ public class Trabajador {
 
 	@Override
 	public String toString() {
-		return "Trabajador [ID=" + ID + ", nombre=" + nombre + ", apellido=" + apellido + ", provincia=" + provincia
-				+ ", telefono=" + telefono + ", correoEmpresa=" + correoEmpresa + ", sueldo=" + sueldo + "]";
+		return "Trabajador [ID=" + ID + ", nombre=" + nombre + ", apellido=" + apellido + 
+				", telefono=" + telefono + ", correoEmpresa=" + correoEmpresa + ", sueldo=" + sueldo + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ID, apellido, correoEmpresa, nombre, provincia, sueldo, telefono);
+		return Objects.hash(ID, apellido, correoEmpresa, nombre, sueldo, telefono);
 	}
 
 	@Override
@@ -105,7 +101,6 @@ public class Trabajador {
 		Trabajador other = (Trabajador) obj;
 		return ID == other.ID && Objects.equals(apellido, other.apellido)
 				&& Objects.equals(correoEmpresa, other.correoEmpresa) && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(provincia, other.provincia)
 				&& Double.doubleToLongBits(sueldo) == Double.doubleToLongBits(other.sueldo)
 				&& telefono == other.telefono;
 	}
