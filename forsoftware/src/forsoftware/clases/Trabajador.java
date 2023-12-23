@@ -12,17 +12,17 @@ public class Trabajador {
 	public enum Puesto {
 		programador, modelador, gameDesigner, artista, escritor, video, sonido;
 	}
-	private enum Provincia {
-		Álava, Albacete, Alicante, Almería, Asturias, Ávila, Badajoz, Barcelona, Burgos, Cáceres, Cádiz, Cantabria, Castellón, Ciudad_Real, 
-		Córdoba, Cuenca, Gerona, Granada, Guadalajara, Guipúzcoa, Huelva, Huesca, Islas_Baleares, Jaén, La_Coruña, La_Rioja, Las_Palmas, 
-		León, Lérida, Lugo, Madrid, Málaga, Murcia, Navarra, Orense, Palencia, Pontevedra, Salamanca, Tenerife, 
+	public enum Provincia {
+		Alava, Albacete, Alicante, Almeria, Asturias, Avila, Badajoz, Barcelona, Burgos, Cáceres, Cadiz, Cantabria, Castellon, Ciudad_Real, 
+		Cordoba, Cuenca, Gerona, Granada, Guadalajara, Guipuzcoa, Huelva, Huesca, Islas_Baleares, Jaen, La_Coruna, La_Rioja, Las_Palmas, 
+		Leon, Lérida, Lugo, Madrid, Malaga, Murcia, Navarra, Orense, Palencia, Pontevedra, Salamanca, Tenerife, 
 		Segovia, Sevilla, Soria, Tarragona, Teruel, Toledo, Valencia, Valladolid, Vizcaya, Zamora, Zaragoza;
 	};
 	private int telefono;
 	private String correoEmpresa;
 	private double sueldo;
 	
-	public Trabajador(int iD, String nombre, String apellido, String provincia, int telefono, String correoEmpresa, double sueldo, int ID) {
+	public Trabajador(int iD, String nombre, String apellido, int telefono, String correoEmpresa, double sueldo, int ID) {
 		this.ID = ID;
 		this.nombre = nombre;
 		this.apellido = apellido;

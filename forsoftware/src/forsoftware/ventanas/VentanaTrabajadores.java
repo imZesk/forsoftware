@@ -23,6 +23,7 @@ import javax.swing.table.TableRowSorter;
 
 import forsoftware.clases.Trabajador.Puesto;
 import forsoftware.clases.Trabajador.Sexo;
+import forsoftware.clases.Trabajador.Provincia;
 import forsoftware.renderer.rendererRoles;
 
 public class VentanaTrabajadores extends JPanel{
@@ -142,7 +143,7 @@ public class VentanaTrabajadores extends JPanel{
 			JTextField[] jTextIntroducido = new JTextField[6];
 			Color[] colorDefecto = new Color[6]; //para poner el fondo de nuevo en blanco
 			String[] nomDatos = {"ID (4 dígitos)", "Nombre (solo letras)", "Apellido (solo letras)",
-					"Provincia (solo letras)", "Telefono (9 digitos)", "Sueldo (numero con dos decimales)"};
+					             "Telefono (9 digitos)", "Sueldo (numero con dos decimales)"};
 
 			for (int pos = 0; pos < nomDatos.length; pos++) {
 				JLabel label = new JLabel(nomDatos[pos]);
@@ -165,6 +166,12 @@ public class VentanaTrabajadores extends JPanel{
 			comboBoxPuesto.setSelectedItem(null);
 			comboBoxPanel.add(labelPuesto);
 			comboBoxPanel.add(comboBoxPuesto);
+			
+			JLabel labelProvincia = new JLabel("Provincia:");
+			JComboBox<Provincia> comboBoxProvincia = new JComboBox<>(Provincia.values());
+			comboBoxProvincia.setSelectedItem(null);
+			comboBoxPanel.add(labelProvincia);
+			comboBoxPanel.add(comboBoxProvincia);
 
 			//parte de los botones
 			JPanel botonPanel = new JPanel(); 
@@ -196,9 +203,17 @@ public class VentanaTrabajadores extends JPanel{
 					} else {
 						comboBoxPuesto.setBackground(Color.WHITE); // Restablecer el color de fondo
 					}
+					
+					Provincia provincia = (Provincia) comboBoxProvincia.getSelectedItem();
+					if (puesto == null) {
+						comboBoxProvincia.setBackground(Color.PINK); // Marcar en rojo si no se selecciona un valor
+						validar = false;;
+					} else {
+						comboBoxProvincia.setBackground(Color.WHITE); // Restablecer el color de fondo
+					}
 
 
-					String[] limitaciones = {"\\d{4}", "[a-zA-Z ]+", "[a-zA-Z ]+", "[a-zA-Z ]+", "\\d{9}", "\\d+\\.\\d{2}"};
+					String[] limitaciones = {"\\d{4}", "[a-zA-Z ]+", "[a-zA-Z ]+", "\\d{9}", "\\d+\\.\\d{2}"};
 
 					for (int i = 0; i < nomDatos.length; i++) {
 						valores[i] = jTextIntroducido[i].getText();
@@ -214,7 +229,7 @@ public class VentanaTrabajadores extends JPanel{
 
 					if (validar) {
 						String correo = valores[1] + "." + valores[2] + "@forsoftware.es";
-						Object[] DatosFila = new Object[] {valores[0], valores[1], valores[2], sexo, puesto, valores[3], valores[4], correo, valores[5]};
+						Object[] DatosFila = new Object[] {valores[0], valores[1], valores[2], sexo, puesto, provincia, valores[3], correo, valores[4]};
 						model.addRow(DatosFila);
 						LOGGER.log(Level.INFO, "Trabajador creado con exito");
 
@@ -286,10 +301,10 @@ public class VentanaTrabajadores extends JPanel{
 
 					// campos de entrada 
 					JPanel panelDeDatos = new JPanel(new GridLayout(9, 2));
-					JTextField[] jTextIntroducido = new JTextField[7];
-					Color[] colorDefecto = new Color[7]; //para poner el fondo de nuevo en blanco
+					JTextField[] jTextIntroducido = new JTextField[6];
+					Color[] colorDefecto = new Color[6]; //para poner el fondo de nuevo en blanco
 					String[] nomDatos = {"ID (4 dígitos)", "Nombre (solo letras)", "Apellido (solo letras)",
-							"Provincia (solo letras)", "Telefono (9 digitos)", "Correo de empresa", "Sueldo (numero con dos decimales)"};
+							 "Telefono (9 digitos)", "Correo de empresa", "Sueldo (numero con dos decimales)"};
 
 					for (int pos = 0; pos < nomDatos.length; pos++) {
 						JLabel label = new JLabel(nomDatos[pos]);
@@ -305,13 +320,12 @@ public class VentanaTrabajadores extends JPanel{
 						jTextIntroducido[0].setText((String) tabla.getValueAt(filaSeleccionada, 0));
 						jTextIntroducido[1].setText((String) tabla.getValueAt(filaSeleccionada, 1));
 						jTextIntroducido[2].setText((String) tabla.getValueAt(filaSeleccionada, 2));
-						jTextIntroducido[3].setText((String) tabla.getValueAt(filaSeleccionada, 5));
-						jTextIntroducido[4].setText((String) tabla.getValueAt(filaSeleccionada, 6));
-						jTextIntroducido[5].setText((String) tabla.getValueAt(filaSeleccionada, 7));
-						jTextIntroducido[6].setText((String) tabla.getValueAt(filaSeleccionada, 8));
+						jTextIntroducido[3].setText((String) tabla.getValueAt(filaSeleccionada, 6));
+						jTextIntroducido[4].setText((String) tabla.getValueAt(filaSeleccionada, 7));
+						jTextIntroducido[5].setText((String) tabla.getValueAt(filaSeleccionada, 8));
 
 					}
-					jTextIntroducido[5].setEditable(false);
+					jTextIntroducido[4].setEditable(false);
 					jTextIntroducido[0].setEditable(false);
 
 					JPanel comboBoxPanel = new JPanel();
@@ -326,6 +340,12 @@ public class VentanaTrabajadores extends JPanel{
 					comboBoxPuesto.setSelectedItem(tabla.getValueAt(filaSeleccionada, 4));
 					comboBoxPanel.add(labelPuesto);
 					comboBoxPanel.add(comboBoxPuesto);
+					
+					JLabel labelProvincia = new JLabel("Provincia:");
+					JComboBox<Provincia> comboBoxProvincia = new JComboBox<>(Provincia.values());
+					comboBoxProvincia.setSelectedItem(tabla.getValueAt(filaSeleccionada, 5));
+					comboBoxPanel.add(labelProvincia);
+					comboBoxPanel.add(comboBoxProvincia);
 
 					JPanel botonPanel = new JPanel(); 
 					JButton botonAceptar = new JButton("Aceptar");
@@ -355,10 +375,19 @@ public class VentanaTrabajadores extends JPanel{
 							} else {
 								comboBoxPuesto.setBackground(Color.WHITE); // Restablecer el color de fondo
 							}
+							
+							Provincia provincia = (Provincia) comboBoxProvincia.getSelectedItem();
+							if (provincia == null) {
+								comboBoxProvincia.setBackground(Color.PINK); // Marcar en rojo si no se selecciona un valor
+								validar = false;;
+							} else {
+								comboBoxProvincia.setBackground(Color.WHITE); // Restablecer el color de fondo
+							}
 
 
 
-							String[] limitaciones = {"\\d{4}", "[a-zA-Z ]+", "[a-zA-Z ]+", "[a-zA-Z ]+", "\\d{9}", ".*", "\\d+\\.\\d{2}"};
+
+							String[] limitaciones = {"\\d{4}", "[a-zA-Z ]+", "[a-zA-Z ]+", "\\d{9}", ".*", "\\d+\\.\\d{2}"};
 
 							for (int i = 0; i < nomDatos.length; i++) {
 								valores[i] = jTextIntroducido[i].getText();
@@ -375,7 +404,7 @@ public class VentanaTrabajadores extends JPanel{
 							if (validar) {
 								String correo = valores[1] + "." + valores[2] + "@forsoftware.es";
 								model.removeRow(filaSeleccionada);
-								model.addRow(new Object[]{valores[0], valores[1], valores[2], sexo, puesto, valores[3], valores[4], correo, valores[6]});
+								model.addRow(new Object[]{valores[0], valores[1], valores[2], sexo, puesto, provincia, valores[3], correo, valores[5]});
 								LOGGER.log(Level.INFO, "Trabajador editado con exito");
 
 								ventanillaEditar.dispose();
