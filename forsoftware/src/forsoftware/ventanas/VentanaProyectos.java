@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -43,6 +43,12 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDate;
 
 
 public class VentanaProyectos extends JPanel{
@@ -66,6 +72,54 @@ public class VentanaProyectos extends JPanel{
 				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "Pendiente"},
 
 		};
+		
+		try {
+			Class.forName("org.sqlite.JDBC");
+			} catch (ClassNotFoundException e) {
+			System.out.println("No se ha podido cargar el driver de la base de datos");
+			}
+		 try {
+	            Connection conn = DriverManager.getConnection("jdbc:sqlite:Proyectos/sqlite.db");
+	            System.out.println(conn);
+	            
+	            Statement stmt = conn.createStatement();
+	            ResultSet rs = stmt.executeQuery("SELECT * FROM proyectos");
+	            
+	            while (rs.next()) {
+	            	int id = rs.getInt("id");
+	                String nombre = rs.getString("nombre");
+	                int participantes = rs.getInt("Num_Participantes");
+	                Date fechaInicio = rs.getDate("FechaInicio");
+	                Date fechaAcabado = rs.getDate("FechaAcabado");
+	                Float gastos = rs.getFloat("Gastos");
+	                String tipo = rs.getString("Tipo");
+	                String estado = rs.getString("Estado");
+	            }
+	            
+	            rs.close();
+	            
+	            int id = 1112;
+	            String nombre = "homer";
+	            int participantes = 5;
+	            LocalDate fechaInicio = LocalDate.of(2024, 1, 11);
+	            LocalDate fechaAcabado = LocalDate.of(2024, 1, 13);
+                Float gastos = (float) 55.35;
+                String tipo = "software";
+                String estado = "Pendiente";
+	            
+	            String insert = "INSERT INTO proyectos"
+	                    + " VALUES ('" + id + "', '"  + nombre + "', '"  + participantes +"', '"  + fechaInicio +"', '"  + fechaAcabado +"', '"  + gastos +"', '"  + tipo +"', '"  + estado + "');";
+	            System.out.println(insert);
+	            int rows = stmt.executeUpdate(insert);
+	            System.out.println(rows);
+	            
+	            stmt.close();
+	            conn.close();
+	        } catch (SQLException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+
 
 
 		DefaultTableModel model = new DefaultTableModel(datos, columnas) {
