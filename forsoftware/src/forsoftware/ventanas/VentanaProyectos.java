@@ -470,13 +470,14 @@ public class VentanaProyectos extends JPanel{
 
 		//--------------------------------------------------------------------------------------------------------------------------
 		//Ventanilla para mostrar los datos de los trabajadores que hay en ese proyecto
-
+/*
 		for (int i = 0; i < tabla.getColumnCount(); i++) {
             tabla.getColumnModel().getColumn(i).setCellRenderer(new TooltipRenderer());
         }
-        
+        */
         
 	}
+	/*
 	 private class TooltipRenderer extends DefaultTableCellRenderer {
 	        @Override
 	        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -496,7 +497,7 @@ public class VentanaProyectos extends JPanel{
 	            return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 	        }
 	    }
-
+*/
 	    public static void main(String[] args) {
 	        SwingUtilities.invokeLater(() -> new VentanaProyectos());
 	    }

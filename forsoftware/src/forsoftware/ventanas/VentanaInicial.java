@@ -230,7 +230,7 @@ public class VentanaInicial extends JFrame {
 				while(true) {
 					Date fecha = new Date();
 					LocalDate fechaUpdated = LocalDate.now();
-					setTitle("Bienvenido, [] - ForSoftware - " + sdf.format(fecha) + " " + fechaUpdated.getDayOfMonth() + "/" + fechaUpdated.getMonth()+ "/" +fechaUpdated.getYear());
+					setTitle("Bienvenido "+nombre+ " - ForSoftware" + sdf.format(fecha) + " " + fechaUpdated.getDayOfMonth() + "/" + fechaUpdated.getMonth()+ "/" +fechaUpdated.getYear());
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
@@ -243,7 +243,7 @@ public class VentanaInicial extends JFrame {
 		t.start();
 
         // Configurar ventana
-        setTitle("Bienvenido, [] - ForSoftware");
+        setTitle("Bienvenido "+nombre + " - ForSoftware");
         setSize(1200, 500);
         setLocationRelativeTo(null);//centrar la ventana a la pantalla
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
