@@ -29,7 +29,7 @@ import forsoftware.renderer.rendererRoles;
 public class VentanaTrabajadores extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger LOGGER = Logger.getLogger( VentanaTrabajadores.class.getName() );
+	private static final Logger logger = Logger.getLogger( VentanaTrabajadores.class.getName() );
 
 
 	public VentanaTrabajadores() {
@@ -63,15 +63,16 @@ public class VentanaTrabajadores extends JPanel{
 			            throw new IllegalArgumentException("La línea no tiene el número correcto de campos");
 			        }
 				
-				model.addRow(data);				
+				model.addRow(data);		
+				logger.info("Se han guardado correctamente los datos en la direccion: src/Trabajadores.csv");
 			}
 
 		}catch (FileNotFoundException e) {
-		    System.out.println("El archivo no se ha encontrado: " + e.getMessage());
+			logger.warning(String.format("El archivo de trabajadores no se ha encontrado: %s", e.getMessage()));
 		}catch (IOException e) {
-			e.printStackTrace();
+			logger.warning(String.format("Error al importar/guardar los datos de los trabajadores: %s", e.getMessage()));
 		}catch (IllegalArgumentException e) {
-		    System.out.println("Error en los datos: " + e.getMessage());
+			logger.warning(String.format("Error, argumento inapropiado de los datos trabajadores: %s", e.getMessage()));
 		}
 
 
@@ -106,7 +107,7 @@ public class VentanaTrabajadores extends JPanel{
 			if(filaSeleccionada >= 0){
 				organizador.setRowFilter(null);     // resetear el filtro antes de eliminar la fila para no dar error
 				model.removeRow(filaSeleccionada);
-				LOGGER.log(Level.INFO, "Trabajador seleccionado eliminado");
+				logger.log(Level.INFO, "Trabajador seleccionado eliminado");
 
 				try (FileWriter writer = new FileWriter(fichero, false)) {
 					for (int i = 0; i < model.getRowCount(); i++) {
@@ -118,10 +119,12 @@ public class VentanaTrabajadores extends JPanel{
 						}
 						writer.append('\n');
 					}
+					logger.info("Se ha eliminado los datos del trabajdor en el fichero");
+					
 				} catch (IOException ex) {
-					System.out.println(ex.getMessage());
+					logger.warning(String.format("Error al importar/guardar los datos de los trabajadores: %s", ex.getMessage()));
 				}catch (IllegalArgumentException ex) {
-		            System.out.println("Error en los datos de la tabla: " + ex.getMessage());
+					logger.warning(String.format("Error, argumento inapropiado de los datos trabajadores: %s", ex.getMessage()));
 		        }
 
 			}else{
@@ -231,7 +234,7 @@ public class VentanaTrabajadores extends JPanel{
 						String correo = valores[1] + "." + valores[2] + "@forsoftware.es";
 						Object[] DatosFila = new Object[] {valores[0], valores[1], valores[2], sexo, puesto, provincia, valores[3], correo, valores[4]};
 						model.addRow(DatosFila);
-						LOGGER.log(Level.INFO, "Trabajador creado con exito");
+						logger.log(Level.INFO, "Trabajador creado con exito");
 
 
 
@@ -243,14 +246,15 @@ public class VentanaTrabajadores extends JPanel{
 									csvLine.append(";");
 								}
 							}
+							logger.info("Se ha anyadido los datos del trabajdor en el fichero");
 
 							writer.write(csvLine.toString());
 							writer.newLine();
 						} catch (IOException ex) {
-							ex.printStackTrace();
+							logger.warning(String.format("Error al importar/guardar los datos de los trabajadores: %s", ex.getMessage()));
 							JOptionPane.showMessageDialog(ventanillaAnyadir, "Error al escribir en el archivo CSV.");
 						}catch (IllegalArgumentException ex) {
-						    System.out.println("Error en los datos de la tabla: " + ex.getMessage());
+							logger.warning(String.format("Error, argumento inapropiado de los datos trabajadores: %s", ex.getMessage()));
 						}
 
 
@@ -265,7 +269,7 @@ public class VentanaTrabajadores extends JPanel{
 
 			botonCancelar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					LOGGER.log(Level.INFO, "Creacion de trabajador cancelada");
+					logger.log(Level.INFO, "Creacion de trabajador cancelada");
 					ventanillaAnyadir.dispose();
 
 				}
@@ -405,12 +409,12 @@ public class VentanaTrabajadores extends JPanel{
 								String correo = valores[1] + "." + valores[2] + "@forsoftware.es";
 								model.removeRow(filaSeleccionada);
 								model.addRow(new Object[]{valores[0], valores[1], valores[2], sexo, puesto, provincia, valores[3], correo, valores[5]});
-								LOGGER.log(Level.INFO, "Trabajador editado con exito");
+								logger.log(Level.INFO, "Trabajador editado con exito");
 
 								ventanillaEditar.dispose();
 							} else {
 								JOptionPane.showMessageDialog(ventanillaEditar, "Los datos introducidos tienen algún fallo. Por favor, verifique los campos resaltados en rojo.");
-								LOGGER.log(Level.INFO, "Error, uno de los campos no esta bien rellenado");
+								logger.log(Level.INFO, "Error, uno de los campos no esta bien rellenado");
 
 							}
 
@@ -425,9 +429,9 @@ public class VentanaTrabajadores extends JPanel{
 									writer.append('\n');
 								}
 							} catch (IOException ex) {
-								System.out.println(ex.getMessage());
+								logger.warning(String.format("Error al importar/guardar los datos: %s", ex.getMessage()));
 							}catch (IllegalArgumentException ex) {
-							    System.out.println("Error en los datos de la tabla: " + ex.getMessage());
+								logger.warning(String.format("Error, argumento inapropiado de los datos trabajadores: %s", ex.getMessage()));
 							}
 
 
@@ -437,7 +441,7 @@ public class VentanaTrabajadores extends JPanel{
 
 					botonCancelar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							LOGGER.log(Level.INFO, "Editar trabajador cancelado");
+							logger.log(Level.INFO, "Editar trabajador cancelado");
 							ventanillaEditar.dispose();
 
 						}

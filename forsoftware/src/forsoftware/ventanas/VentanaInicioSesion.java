@@ -87,7 +87,7 @@ public class VentanaInicioSesion extends JFrame {
 	            String value = prop.getProperty(key);
 	            properties.put(key, value);
 	        }
-	        logger.info("Los archivos de propiedades se han guardado correctamente: %s");
+	        logger.info("Los archivos de propiedades se han guardado correctamente");
 
 
 	    }catch (FileNotFoundException ex) {
