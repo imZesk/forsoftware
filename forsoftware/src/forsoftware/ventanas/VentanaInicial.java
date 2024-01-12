@@ -12,8 +12,10 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class VentanaInicial extends JFrame {
+	protected Logger logger = Logger.getLogger( VentanaInicial.class.getName() );
 
 	private static final long serialVersionUID = 1L;
 	private static String correoUsuario;
@@ -33,7 +35,9 @@ public class VentanaInicial extends JFrame {
                 String correo = values[7];
                 mapa.put(correo, values);
             }
+            logger.info("Se han añadido los datos de los trabajadores correctamente");
         } catch (IOException e) {
+        	logger.warning(String.format("Error al importar/guardar los datos der los trabajadores: %s", e.getMessage()));
             e.printStackTrace();
         }
         
@@ -235,7 +239,7 @@ public class VentanaInicial extends JFrame {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						logger.warning("Error, el hilo ha sido interrumpido");
 					}
 				}
 			}
