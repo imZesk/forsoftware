@@ -79,7 +79,7 @@ public class VentanaProyectos extends JPanel{
 			System.out.println("No se ha podido cargar el driver de la base de datos");
 			}
 		 try {
-	            Connection conn = DriverManager.getConnection("jdbc:sqlite:Proyectos/sqlite.db");
+	            Connection conn = DriverManager.getConnection("jdbc:sqlite:Proyectos");
 	            System.out.println(conn);
 	            
 	            Statement stmt = conn.createStatement();
@@ -520,38 +520,12 @@ public class VentanaProyectos extends JPanel{
 		tabla.setCellSelectionEnabled(true);
 		tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
 		tabla.setDefaultRenderer(Object.class, cellRenderer);
+	}
 
 
 		//--------------------------------------------------------------------------------------------------------------------------
 		//Ventanilla para mostrar los datos de los trabajadores que hay en ese proyecto
-/*
-		for (int i = 0; i < tabla.getColumnCount(); i++) {
-            tabla.getColumnModel().getColumn(i).setCellRenderer(new TooltipRenderer());
-        }
-        */
-        
-	}
-	/*
-	 private class TooltipRenderer extends DefaultTableCellRenderer {
-	        @Override
-	        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-	            // Obtener el valor de la celda
-	            String valorCelda = (String) value;
 
-	            // Crear el tooltip con la información de la fila completa
-	            String tooltipText = String.format("<html>ID: %s<br>Nombre: %s<br>NumParticipantes: %s<br>Fecha Inicio: %s<br>Fecha Acabado: %s</html>", row + 1,
-	                    table.getValueAt(row, 0), table.getValueAt(row, 1),
-	                    table.getValueAt(row, 2), table.getValueAt(row, 3),
-	                    table.getValueAt(row, 4));
-
-	            // Establecer el tooltip en la celda
-	            setToolTipText(tooltipText);
-
-	            // Devolver el componente renderizado
-	            return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-	        }
-	    }
-*/
 	    public static void main(String[] args) {
 	        SwingUtilities.invokeLater(() -> new VentanaProyectos());
 	    }
