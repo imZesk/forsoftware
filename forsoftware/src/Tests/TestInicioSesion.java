@@ -1,10 +1,13 @@
 package Tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import java.util.Map;
 
-import org.junit.jupiter.api.Test;
-
-class TestInicioSesion {
+public class TestInicioSesion {
+	private TestInicioSesion ventana;
+	private Map<String, String> mapaPrueba;
 
 	@Test
 	void test() {

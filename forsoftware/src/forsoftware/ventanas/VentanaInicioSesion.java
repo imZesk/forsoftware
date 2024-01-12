@@ -27,7 +27,7 @@ import javax.swing.JTextField;
 public class VentanaInicioSesion extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
-    private static final Logger logger = Logger.getLogger( VentanaInicioSesion.class.getName() );
+    protected Logger logger = Logger.getLogger( VentanaInicioSesion.class.getName() );
 
 	private JPanel pNorte, pSur, pCentro;
 	private JTextField correo;
@@ -38,6 +38,33 @@ public class VentanaInicioSesion extends JFrame {
 	private JLabel etiquietaContraseña;
 	Map<String, String> mapa = new HashMap<>();
 	Map<String, String> properties = new HashMap<>();
+	
+	
+	   public JTextField getCorreoField() {
+	        return correo;
+	    }
+
+	    public JPasswordField getContraseñaField() {
+	        return contraseña;
+	    }
+
+	    public JButton getConfirmarButton() {
+	        return confirmar;
+	    }
+
+	    // Método para simular el click en el botón confirmar
+	    public void simularClickConfirmar() {
+	        confirmar.doClick();
+	    }
+
+	    // Separación de la lógica de negocio
+	    public boolean validarCredenciales(String correo, String contraseña) {
+	        // Lógica para validar las credenciales
+	        return mapa.containsKey(correo) && mapa.get(correo).equals(contraseña);
+	    }
+	    
+	    
+	
 	
 	public VentanaInicioSesion() {
 		super();
@@ -137,6 +164,8 @@ public class VentanaInicioSesion extends JFrame {
 		
 		setVisible(true);
 	}
+	
+	
 	
 	public static void main(String[] args) {
 		new VentanaInicioSesion();
