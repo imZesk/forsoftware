@@ -27,7 +27,7 @@ import javax.swing.JTextField;
 public class VentanaInicioSesion extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
-    private static final Logger LOGGER = Logger.getLogger( VentanaInicioSesion.class.getName() );
+    private static final Logger logger = Logger.getLogger( VentanaInicioSesion.class.getName() );
 
 	private JPanel pNorte, pSur, pCentro;
 	private JTextField correo;
@@ -60,18 +60,19 @@ public class VentanaInicioSesion extends JFrame {
 	            String value = prop.getProperty(key);
 	            properties.put(key, value);
 	        }
-	        System.out.println(properties);
+	        logger.info("Los archivos de propiedades se han guardado correctamente: %s");
+
 
 	    }catch (FileNotFoundException ex) {
-	        System.out.println("El archivo de propiedades no se ha encontrado: " + ex.getMessage());
+	    	logger.warning(String.format("El archivo de propiedades no se ha encontrado: %s", ex.getMessage()));
 	    } catch (IOException ex) {
-	        ex.printStackTrace();
+	    	logger.warning(String.format("Error al importar/guardar los datos: %s", ex.getMessage()));
 	    } finally {
 	        if (input != null) {
 	            try {
 	                input.close();
 	            } catch (IOException e) {
-	                e.printStackTrace();
+	            	logger.warning(String.format("Error al importar/guardar los datos: %s", e.getMessage()));
 	            }
 	        }
 	    }
@@ -85,12 +86,13 @@ public class VentanaInicioSesion extends JFrame {
                 String nombre = values[1];
                 mapa.put(correo, nombre);
             }
+            logger.info("Se han guardado correctamente los datos en la direccion: src/Trabajadores.csv");
         }catch (FileNotFoundException e) {
-		    System.out.println("El archivo no se ha encontrado: " + e.getMessage());
+        	logger.warning(String.format("Error, el archivo no se ha encontrado: : %s", e.getMessage()));
 		}catch (IOException e) {
-			e.printStackTrace();
+        	logger.warning(String.format("Error al importar/guardar los datos: %s", e.getMessage()));
 		}catch (IllegalArgumentException e) {
-		    System.out.println("Error en los datos: " + e.getMessage());
+        	logger.warning(String.format("Error, argumento inapropiado de los datos: %s", e.getMessage()));
 		}
         System.out.println(mapa);
 		
@@ -124,7 +126,7 @@ public class VentanaInicioSesion extends JFrame {
 		    } else if (mapa.containsKey(text1) && mapa.get(text1).equals(text2)) {
 		        JOptionPane.showMessageDialog(null, "Válido");
 		        new VentanaInicial(text1);
-		        LOGGER.log(Level.INFO, "Sesion iniciada como: " + text1);
+		        logger.log(Level.INFO, "Sesion iniciada como: " + text1);
 		        dispose();
 		    } else {
 		        JOptionPane.showMessageDialog(null, "Correo o contraseña inválidos");
