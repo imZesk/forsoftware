@@ -72,7 +72,7 @@ public class VentanaProyectos extends JPanel{
 				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "Pendiente"},
 
 		};
-		
+		//Base de datos
 		try {
 			Class.forName("org.sqlite.JDBC");
 			} catch (ClassNotFoundException e) {
@@ -119,7 +119,7 @@ public class VentanaProyectos extends JPanel{
 	            // TODO Auto-generated catch block
 	            e.printStackTrace();
 	        }
-
+		 //Fin base de datos
 
 
 		DefaultTableModel model = new DefaultTableModel(datos, columnas) {

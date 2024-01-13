@@ -39,7 +39,7 @@ public class VentanaInicioSesion extends JFrame {
 	Map<String, String> mapa = new HashMap<>();
 	Map<String, String> properties = new HashMap<>();
 	
-	
+	//Getters JUnit
 	   public JTextField getCorreoField() {
 	        return correo;
 	    }
