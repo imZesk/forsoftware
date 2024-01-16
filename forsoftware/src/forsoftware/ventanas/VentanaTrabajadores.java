@@ -496,7 +496,7 @@ public class VentanaTrabajadores extends JPanel{
 		add(panelFiltro, BorderLayout.NORTH);
 
 		//--------------------------------------------------------------------------------------------------------------------------
-		// Aplicar el render en todas la tabla
+		// Aplicar el rendererTablas en todas la tabla
 		TableCellRenderer cellRenderer = new rendererTablas(filtroTextField);
 		tabla.setCellSelectionEnabled(true);
 		tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
