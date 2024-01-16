@@ -61,17 +61,21 @@ public class VentanaProyectos extends JPanel{
 		// Crear los datos de ejemplo 
 		String[] columnas = {"ID", "Nombre", "nº participantes", "FechaInicio", "FechaAcabado", "Gastos", "Tipo", "Estado"};
 		String[][] datos = {
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "Pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "Pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "Pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","software", "Pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "Pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "Pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "Pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "Pendiente"},
-				{"1112", "Proyect1", "5", "12/12/2012", "12/12/2013","50214.00","multimedia", "Pendiente"},
 
 		};
+
+
+
+		DefaultTableModel model = new DefaultTableModel(datos, columnas) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false; // Hace que todas las celdas sean de solo lectura
+			}
+		};
+
+		
 		//Base de datos
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -89,48 +93,24 @@ public class VentanaProyectos extends JPanel{
 	            	int id = rs.getInt("id");
 	                String nombre = rs.getString("nombre");
 	                int participantes = rs.getInt("Num_Participantes");
-	                Date fechaInicio = rs.getDate("FechaInicio");
-	                Date fechaAcabado = rs.getDate("FechaAcabado");
+	                String fechaInicio = rs.getString("FechaInicio");
+	                String fechaAcabado = rs.getString("FechaAcabado");
 	                Float gastos = rs.getFloat("Gastos");
 	                String tipo = rs.getString("Tipo");
 	                String estado = rs.getString("Estado");
+	                
+					model.addRow(new Object[]{id, nombre, participantes, fechaInicio, fechaAcabado, gastos, tipo, estado});
+
 	            }
 	            
 	            rs.close();
-	            
-	            int id = 1112;
-	            String nombre = "homer";
-	            int participantes = 5;
-	            LocalDate fechaInicio = LocalDate.of(2024, 1, 11);
-	            LocalDate fechaAcabado = LocalDate.of(2024, 1, 13);
-                Float gastos = (float) 55.35;
-                String tipo = "software";
-                String estado = "Pendiente";
-	            
-	            String insert = "INSERT INTO proyectos"
-	                    + " VALUES ('" + id + "', '"  + nombre + "', '"  + participantes +"', '"  + fechaInicio +"', '"  + fechaAcabado +"', '"  + gastos +"', '"  + tipo +"', '"  + estado + "');";
-	            System.out.println(insert);
-	            int rows = stmt.executeUpdate(insert);
-	            System.out.println(rows);
-	            
-	            stmt.close();
+
 	            conn.close();
 	        } catch (SQLException e) {
 	            // TODO Auto-generated catch block
 	            e.printStackTrace();
 	        }
 		 //Fin base de datos
-
-
-		DefaultTableModel model = new DefaultTableModel(datos, columnas) {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false; // Hace que todas las celdas sean de solo lectura
-			}
-		};
-
 
 		JTable tabla = new JTable(model);
 		TableRowSorter<TableModel> organizador = new TableRowSorter<TableModel>(tabla.getModel());
