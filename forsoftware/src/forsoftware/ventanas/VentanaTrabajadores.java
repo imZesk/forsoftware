@@ -25,6 +25,7 @@ import forsoftware.clases.Trabajador.Puesto;
 import forsoftware.clases.Trabajador.Sexo;
 import forsoftware.clases.Trabajador.Provincia;
 import forsoftware.renderer.rendererRoles;
+import forsoftware.renderer.rendererTablas;
 
 public class VentanaTrabajadores extends JPanel{
 
@@ -495,39 +496,8 @@ public class VentanaTrabajadores extends JPanel{
 		add(panelFiltro, BorderLayout.NORTH);
 
 		//--------------------------------------------------------------------------------------------------------------------------
-		//Render para el filtro que hace que ponga en rojo y negrita las letras/numeros del table con lo que introduces en el filtro
-		//poner el fondo en gris con la celda seleccioanda
-		TableCellRenderer cellRenderer = (table, value, isSelected, hasFocus, row, column) -> {
-			JLabel result = new JLabel(value.toString());
-			int selectedRow = -1; // Variable para rastrear la fila seleccionada
-
-			if (value != null) {
-				String textoCelda = value.toString();
-				String textoFiltro = filtroTextField.getText();
-
-				if (!textoFiltro.isBlank() && textoCelda.contains(textoFiltro)) {
-					String inicioStr = textoCelda.substring(0, textoCelda.indexOf(textoFiltro));
-					String finalStr = textoCelda.substring(textoCelda.indexOf(textoFiltro) + textoFiltro.length());
-
-					result.setText("<html>" + inicioStr + "<font color='red'><strong>" + textoFiltro + "</strong></font>" + finalStr + "</html>");
-				}   //"<HTML>" poner en formato HTML para no dar errores de caracteres
-			}		//"<STRONG style='color:red'>" poner en negrita y rojo
-
-			if (isSelected) {
-				if (selectedRow != -1 && selectedRow != row) {
-					// Restablecer el color de fondo de la fila anteriormente seleccionada
-					table.setRowSelectionInterval(selectedRow, selectedRow);
-				}
-				result.setBackground(Color.gray.brighter());
-				selectedRow = row; // Actualizar la fila seleccionada
-			} else {
-				result.setBackground(table.getBackground());
-			}
-			result.setOpaque(true);
-			return result;
-		};
-
 		// Aplicar el render en todas la tabla
+		TableCellRenderer cellRenderer = new rendererTablas(filtroTextField);
 		tabla.setCellSelectionEnabled(true);
 		tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
 		tabla.setDefaultRenderer(Object.class, cellRenderer);
