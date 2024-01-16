@@ -56,6 +56,10 @@ public class VentanaInicioSesion extends JFrame {
 	    public void simularClickConfirmar() {
 	        confirmar.doClick();
 	    }
+	    
+	    public Map<String, String> getMapa() {
+	        return mapa;
+	    }
 
 	    // Separación de la lógica de negocio
 	    public boolean validarCredenciales(String correo, String contraseña) {
