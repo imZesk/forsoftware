@@ -175,6 +175,7 @@ public class VentanaInicial extends JFrame {
         panelDatos.add(campoCorreoEmp);
         
         panel1.add(panelDatos, BorderLayout.CENTER);
+        panel1.add(panelBotones, BorderLayout.SOUTH);
         
         // Octavo dato
         JLabel etiquetaSueldo = new JLabel("Sueldo: ");
