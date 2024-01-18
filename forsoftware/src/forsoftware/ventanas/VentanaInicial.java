@@ -66,7 +66,7 @@ public class VentanaInicial extends JFrame {
         JButton btnContrasena = new JButton("Cambiar contraseña");
         JButton btnCerrarSesion = new JButton("Cerrar sesion");
         
-        panelBotones.add(btnContrasena);
+        //panelBotones.add(btnContrasena);
         panelBotones.add(btnCerrarSesion);
         
         btnCerrarSesion.addActionListener(e ->{
@@ -81,11 +81,11 @@ public class VentanaInicial extends JFrame {
             	String contNueva1 = JOptionPane.showInputDialog("Introduce tu nueva contraseña");
             	String contNueva2 = JOptionPane.showInputDialog("Introduce de nuevo tu nueva contraseña");
             	if (contNueva1.equals(contNueva2)) {
-            		JOptionPane.showMessageDialog(null, "Contraseña cambiada, inicia sesion de nuevo."); // La contraseña no se actualiza por que no tenemos las bases de 
-                	new VentanaInicioSesion();															 // datos de usuarios creadas
+            		JOptionPane.showMessageDialog(null, "Contraseña cambiada, inicia sesion de nuevo.");
+                	new VentanaInicioSesion();															
                 	dispose();
 				}else {
-	                JOptionPane.showMessageDialog(null, "Las ontraseñas no coinciden");
+	                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
 				}            	
             }else{
             	System.out.println(passTest);
